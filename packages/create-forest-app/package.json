@@ -1,0 +1,10 @@
+{
+  "name": "create-forest-app",
+  "version": "1.0.0",
+  "bin": {
+    "create-forest-app": "index.js"
+  },
+  "dependencies": {
+    "@forest-js/cli": "workspace:*"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@forest-js/core",
+  "version": "1.0.0",
+  "description": "A tiny, functional DOM engine with explicit update and real DOM.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lurainGrangbelr/todm.git"
+  },
+  "keywords": [
+    "dom",
+    "engine",
+    "functional",
+    "minimal",
+    "ui",
+    "reactive",
+    "real-dom"
+  ],
+  "author": "lurain grangbelr <luraingrangbelr@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

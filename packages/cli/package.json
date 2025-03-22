@@ -1,0 +1,13 @@
+{
+  "name": "@forest-js/cli",
+  "version": "1.0.0",
+  "description": "CLI for tree.js demo",
+  "bin": {
+    "tree": "bin/index.js"
+  },
+  "license": "MIT",
+  "files": [
+    "bin",
+    "templates"
+  ]
+}

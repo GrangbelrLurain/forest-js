@@ -1,0 +1,24 @@
+{
+  "name": "forest-js",
+  "version": "1.0.0",
+  "description": "Document Object Model Create System",
+  "main": "main.js",
+  "scripts": {
+    "test": "test",
+    "build": "pnpm --filter core build",
+    "build:cli": "pnpm --filter cli build",
+    "dev:pure": "pnpm --filter dom-engine-pure-demo dev",
+    "dev:tailwind": "pnpm --filter dom-engine-tailwind-demo dev"
+  },
+  "keywords": [
+    "DOM"
+  ],
+  "author": "lurain grangbelr",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "pnpm@9.14.2"
+}
