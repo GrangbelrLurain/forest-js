@@ -1,16 +1,15 @@
 export type ElementName = keyof HTMLElementTagNameMap;
 
-export type DomElement<T extends ElementName> = HTMLElementTagNameMap[T] & {
-  update: (state: DomProps<T>) => void;
-};
+export type DomElement<T extends ElementName> = HTMLElementTagNameMap[T];
 
 export type DomAttribute<T extends ElementName> = Partial<
   HTMLElementTagNameMap[T]
 >;
 
 export type DomNode =
-  | DomElement<ElementName>[]
-  | DomElement<ElementName>
+  | DomNode[]
+  | HTMLElement[]
+  | HTMLElement
   | string[]
   | number[]
   | string
@@ -36,4 +35,4 @@ export type ComponentProps<P extends Record<string, any>> = {
 
 export type Component<P extends ComponentProps<P>> = (
   props: ComponentProps<P>
-) => DomElement<ElementName>;
+) => HTMLElement;

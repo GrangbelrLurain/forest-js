@@ -7,8 +7,8 @@
     "test": "test",
     "build": "pnpm --filter core build",
     "build:cli": "pnpm --filter cli build",
-    "dev:pure": "pnpm --filter dom-engine-pure-demo dev",
-    "dev:tailwind": "pnpm --filter dom-engine-tailwind-demo dev"
+    "dev:pure": "pnpm --filter forest-pure-demo dev",
+    "dev:tailwind": "pnpm --filter forest-tailwind-demo dev"
   },
   "keywords": [
     "DOM"

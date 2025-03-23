@@ -61,7 +61,10 @@ function applyProps(el: HTMLElement) {
 function normalizeChildren(children: DomNode): Node[] {
   if (typeof children === "string") return [document.createTextNode(children)];
   if (Array.isArray(children)) {
-    return children.map((child) => {
+    return children.flatMap((child) => {
+      if (Array.isArray(child)) {
+        return normalizeChildren(child);
+      }
       if (typeof child === "string") {
         return document.createTextNode(child);
       }
