@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": false,
     "module": "ESNext",
-    "declaration": true, // ✅ 타입 파일 생성
-    "declarationDir": "dist", // ✅ 타입 출력 경로
-    "emitDeclarationOnly": false, // 타입만 빌드하려면 true
-    "outDir": "dist", // JS 출력 경로
-    "rootDir": "src", // 소스 파일 기준
-    "moduleResolution": "node",
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "rootDir": "src",
+    "baseUrl": ".",
+    "composite": true,
+    "skipLibCheck": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["dist", "node_modules"]
 }

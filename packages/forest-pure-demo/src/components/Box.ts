@@ -1,5 +1,4 @@
-import { dom } from "@dom/core/src";
-import { DomNode } from "@dom/core/src/types";
+import { dom, DomNode } from "@forest-js/core";
 
 const Box = ({ children }: { children: DomNode }) => {
   return dom("div", { children });

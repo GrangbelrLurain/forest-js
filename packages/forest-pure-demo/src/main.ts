@@ -1,4 +1,4 @@
-import { createApp, dom } from "@todm/core";
+import { createApp, dom } from "@forest-js/core";
 import Button from "./components/Button";
 
 createApp("#app", () => {

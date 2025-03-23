@@ -21,7 +21,7 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@dom/core/*": ["../core/*"]
+      "@forest-js/core": ["../core/dist"]
     }
   },
   "include": ["src"]
