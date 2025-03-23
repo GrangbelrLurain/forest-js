@@ -1,0 +1,16 @@
+{
+  "name": "create-forest",
+  "version": "1.0.1",
+  "description": "Run forest-js CLI to scaffold a project",
+  "bin": {
+    "create-forest": "index.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@forest-js/cli": "^1.0.3"
+  },
+  "files": [
+    "index.js"
+  ],
+  "license": "MIT"
+}
