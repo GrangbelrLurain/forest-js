@@ -5,8 +5,12 @@
   "main": "main.js",
   "scripts": {
     "test": "test",
-    "build": "pnpm --filter core build",
+    "build:core": "pnpm --filter core build",
     "build:cli": "pnpm --filter cli build",
+    "build:create": "pnpm --filter create-forest build",
+    "publish:core": "pnpm --filter core npm-publish",
+    "publish:cli": "pnpm --filter cli npm-publish",
+    "publish:create": "pnpm --filter create-forest npm-publish",
     "dev:pure": "pnpm --filter forest-pure-demo dev",
     "dev:tailwind": "pnpm --filter forest-tailwind-demo dev"
   },
