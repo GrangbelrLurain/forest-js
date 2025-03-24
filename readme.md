@@ -4,7 +4,7 @@ A tiny, real DOM-based UI engine written in pure JavaScript — minimal, fast, a
 
 ---
 
-## 📆 Packages
+## 📦 Packages
 
 | Package                | Description                       |
 |------------------------|-----------------------------------|
@@ -37,7 +37,7 @@ pnpm dev
 
 ---
 
-## 🧹 Core Example
+## 🧩 Core Example
 
 ```ts
 import { dom, createStore, update } from "@forest-js/core";
@@ -60,6 +60,39 @@ document.body.appendChild(button);
 
 ---
 
+## 🧱 Component Utility (`component()`)
+
+The `component()` utility allows you to create reactive components that automatically re-render when a `Store` in their props updates.
+
+### ✅ How it works
+- Accepts a render function that receives resolved (primitive) props.
+- Accepts both normal values and `Store<T>`s.
+- Automatically `subscribe()`s to each store in props.
+- Replaces the element when store values change.
+
+### 🔧 Example
+```ts
+import { component, dom, createStore, Store } from "@forest-js/core";
+
+interface ButtonProps {
+  count: Store<number>;
+}
+
+const Button = component<ButtonProps>(({ count }) => {
+  return dom("button", {
+    children: `Count: ${count}`,
+    onclick: () => count.update((n) => n + 1),
+  });
+});
+
+const counter = createStore(0);
+document.body.appendChild(Button({ count: counter }));
+```
+
+This encourages a declarative + reactive style without a virtual DOM.
+
+---
+
 ## 📁 Template Project
 
 Default template is based on **pure JavaScript**, using Vite:
@@ -74,7 +107,7 @@ src/
 
 ---
 
-## 📆 Publishing
+## 📦 Publishing
 
 | CLI Tool             | Command                          |
 |----------------------|----------------------------------|
@@ -84,7 +117,7 @@ src/
 
 ---
 
-## 📕 Philosophy
+## 📖 Philosophy
 
 > forest-js is not a framework —  
 > it’s a small set of rules to control the real DOM in a structured way.
