@@ -47,8 +47,18 @@ const BackgroundImage = dom("div", {
 sectionRotate.subscribe(() => {
   update(BackgroundImage, {
     style: {
-      transform: `rotateY(${sectionRotate.get().x}deg) rotateX(${sectionRotate.get().y}deg) scale(1.25)`,
-      transition: "transform 0.1s ease-in-out",
+      transform: `rotateY(${sectionRotate.get().x}deg) rotateX(${
+        sectionRotate.get().y
+      }deg) scale(${
+        1.25 *
+        (1 +
+          (Math.abs(sectionRotate.get().x) + Math.abs(sectionRotate.get().y)) /
+            100)
+      })`,
+      filter: `blur(${
+        (Math.abs(sectionRotate.get().x) + Math.abs(sectionRotate.get().y)) / 10
+      }px)`,
+      transition: "transform 0.1s ease-out",
     },
   });
 });
@@ -99,7 +109,9 @@ export default Button`,
     dom("button", {
       innerText: "📋",
       onclick: () => {
-        navigator.clipboard.writeText(`import { create } from 'zustand'\n\nconst useStore = create()((set) => ({\n  count: 1,\n  inc: () => set((state) => ({ count: state.count + 1 }))\n}))`);
+        navigator.clipboard.writeText(
+          `import { create } from 'zustand'\n\nconst useStore = create()((set) => ({\n  count: 1,\n  inc: () => set((state) => ({ count: state.count + 1 }))\n}))`
+        );
         alert("Copied!");
       },
       style: {
@@ -156,7 +168,7 @@ createApp("#app", () => {
             },
             children: [
               dom("img", {
-                src: "forest_logo.png",
+                src: "logo.svg",
                 style: {
                   width: "60px",
                   height: "60px",

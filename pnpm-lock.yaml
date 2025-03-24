@@ -55,8 +55,8 @@ importers:
   packages/forest-pure-demo:
     dependencies:
       '@forest-js/core':
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       typescript:
         specifier: ~5.7.2
