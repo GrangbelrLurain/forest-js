@@ -1,7 +1,7 @@
 import { Store, Component, DomNode, ComponentProps } from "./types";
 
-export function component<P extends ComponentProps<P>>(render: Component<P>) {
-  return (props: P): DomNode => {
+export function component<P extends ComponentProps<P>>(render: Component<P>): (props: P) => HTMLElement {
+  return (props: P): HTMLElement => {
     let el = render(props);
 
     const update = () => {
@@ -10,7 +10,6 @@ export function component<P extends ComponentProps<P>>(render: Component<P>) {
       el = next;
     };
 
-    // Store만 구독
     for (const key in props) {
       const value = props[key];
       if (isStore(value)) {
@@ -23,11 +22,5 @@ export function component<P extends ComponentProps<P>>(render: Component<P>) {
 }
 
 function isStore<T = any>(value: any): value is Store<T> {
-  return (
-    value &&
-    typeof value.get === "function" &&
-    typeof value.subscribe === "function" &&
-    typeof value.set === "function" &&
-    typeof value.update === "function"
-  );
+  return value && typeof value.get === "function" && typeof value.subscribe === "function" && typeof value.set === "function" && typeof value.update === "function";
 }

@@ -1,6 +1,6 @@
 {
   "name": "@forest-js/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A tiny, functional DOM engine with explicit update and real DOM.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

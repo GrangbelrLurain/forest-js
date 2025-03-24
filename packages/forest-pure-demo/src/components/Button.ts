@@ -1,32 +1,29 @@
-import { component, createStore, dom, Store } from "@forest-js/core";
+import { dom, createStore, update } from "@forest-js/core";
 
-const sharedCount = createStore(0);
+const count = createStore(0);
 
-const Button = () => {
-  const count = createStore(0);
+const Button = dom("button", {
+  children: count.get(),
+  style: {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    backgroundColor: "#5eb482",
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "bold",
+    padding: "4px 10px",
+    borderRadius: "6px",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+    cursor: "pointer",
+  },
+  onclick: () => count.update((n) => n + 1),
+});
 
-  interface ButtonProps {
-    count: Store<number>;
-    sharedCount: Store<number>;
-  }
-
-  const RawButton = component<ButtonProps>(({ count, sharedCount }) => {
-    const button = dom("button", {
-      children: `click me ${count.get()} ${sharedCount.get()}`,
-      style: {
-        color: count.get() > 3 ? "red" : "white",
-        backgroundColor: count.get() > 0 ? "blue" : "white",
-      },
-      onclick: () => {
-        count.update((prev) => prev + 1);
-        sharedCount.update((prev) => prev + 1);
-      },
-    });
-
-    return button;
+count.subscribe(() => {
+  update(Button, {
+    children: count.get(),
   });
-
-  return RawButton({ count, sharedCount });
-};
+});
 
 export default Button;

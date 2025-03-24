@@ -3,10 +3,7 @@ import { DomElement, DomProps, ElementName, DomNode } from "./types";
 
 const listenerMap = new WeakMap<HTMLElement, Record<string, EventListener>>();
 
-const updateMap = new WeakMap<
-  HTMLElement,
-  <T extends ElementName>(props: Partial<DomProps<T>>) => void
->();
+const updateMap = new WeakMap<HTMLElement, <T extends ElementName>(props: Partial<DomProps<T>>) => void>();
 
 const propsMap = new WeakMap<HTMLElement, Partial<DomProps<any>>>();
 
@@ -32,7 +29,6 @@ function applyProps(el: HTMLElement) {
     if (key === "children") {
       while (el.firstChild) el.removeChild(el.firstChild);
       const nodes = normalizeChildren(value);
-      console.log(nodes);
       nodes.forEach((child) => el.appendChild(child));
     } else if (key === "style" && typeof value === "object") {
       Object.assign((el as HTMLElement).style, value);
@@ -83,10 +79,7 @@ function normalizeChildren(children: DomNode): Node[] {
   return [children];
 }
 
-export function dom<T extends ElementName>(
-  tag: T,
-  props: DomProps<T>
-): DomElement<T> {
+export function dom<T extends ElementName>(tag: T, props: DomProps<T>): DomElement<T> {
   const el = document.createElement(tag) as DomElement<T>;
 
   // 내부 props 저장
@@ -105,9 +98,6 @@ export function dom<T extends ElementName>(
   return el;
 }
 
-export function update<T extends ElementName>(
-  el: DomElement<T>,
-  props: Partial<DomProps<T>>
-) {
+export function update<T extends ElementName>(el: DomElement<T>, props: Partial<DomProps<T>>) {
   updateMap.get(el)?.(props);
 }

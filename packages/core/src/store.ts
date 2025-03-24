@@ -15,6 +15,7 @@ export function createStore<T>(initial: T): Store<T> {
       subscribers.forEach((fn) => fn());
     },
     subscribe: (fn) => {
+      subscribers.delete(fn);
       subscribers.add(fn);
       return () => subscribers.delete(fn);
     },
