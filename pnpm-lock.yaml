@@ -49,14 +49,14 @@ importers:
   packages/create-forest:
     dependencies:
       '@forest-js/cli':
-        specifier: workspace:*
-        version: link:../cli
+        specifier: 1.1.0
+        version: 1.1.0
 
   packages/forest-pure-demo:
     dependencies:
       '@forest-js/core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       typescript:
         specifier: ~5.7.2
@@ -68,8 +68,8 @@ importers:
   packages/forest-tailwind-demo:
     dependencies:
       '@forest-js/core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.0.15
@@ -377,6 +377,12 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@forest-js/cli@1.1.0':
+    resolution: {integrity: sha512-9offMWX+RNwsXaOTj7RGf8mjfuZ6pVpcL+zq6ff57u6bFWnlIfoXKFQDWWmifmqJGCCuKc/VDNcmHgyYwwCZKw==}
+
+  '@forest-js/core@1.0.0':
+    resolution: {integrity: sha512-StDDjXjCQ7YpgF2kjRVO7m1hDn05tUtA8caDA6pFINy7e7XMKtuzsDI7NPa1jAtgMwswxbo6Tvi86v9o66M1QQ==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -1524,6 +1530,15 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.1':
     optional: true
+
+  '@forest-js/cli@1.1.0':
+    dependencies:
+      node-fetch: 2.7.0
+      unzipper: 0.12.3
+    transitivePeerDependencies:
+      - encoding
+
+  '@forest-js/core@1.0.0': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:
