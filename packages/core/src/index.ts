@@ -1,5 +1,6 @@
 export { createStore } from "./store";
-export { createApp } from "./app";
-export { dom, update } from "./dom";
-export { component } from "./component";
+export { createForest } from "./forest";
+export { tree } from "./tree";
+export * from "./utilities";
+export * from "./trigger";
 export type * from "./types";
