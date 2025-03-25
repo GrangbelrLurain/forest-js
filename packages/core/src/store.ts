@@ -19,5 +19,8 @@ export function createStore<T>(initial: T): Store<T> {
       subscribers.add(fn);
       return () => subscribers.delete(fn);
     },
+    unsubscribe: (fn) => {
+      subscribers.delete(fn);
+    },
   };
 }
