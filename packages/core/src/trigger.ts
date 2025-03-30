@@ -1,19 +1,14 @@
-import {
-  Triggers,
-  CreateStoreAwareUtility,
-  StoreMap,
-  StoreAwareUtilityProps,
-} from "./types";
+import { Triggers, StoreMap, TriggerUtility, UtilityProps } from "./types";
 import { createUtility } from "./utilities";
 import { ensureMeta } from "./tree";
 import { enqueue } from "./flush";
 
-export const addTrigger: CreateStoreAwareUtility<Triggers> = <
+export const addTrigger: TriggerUtility<HTMLElement> = <
+  E extends HTMLElement,
   R extends Triggers,
-  S extends StoreMap = StoreMap,
-  E extends Element = Element
+  S extends StoreMap = StoreMap
 >(
-  ...args: StoreAwareUtilityProps<R, S>
+  ...args: UtilityProps<R, S>
 ) => {
   return createUtility((el: E) => {
     const meta = ensureMeta(el);

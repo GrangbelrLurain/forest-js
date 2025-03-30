@@ -10,7 +10,7 @@ import {
 const CountButton = () => {
   const count = createStore(0);
 
-  const ButtonDef = use(
+  const ButtonDef = use<HTMLButtonElement>(
     addChild({ count }, ({ count }) => count),
     addStyle({
       position: "absolute",

@@ -1,9 +1,13 @@
 import {
   Utility,
   StoreMap,
-  CreateStoreAwareUtility,
-  StoreAwareUtilityProps,
   TreeNode,
+  StoreValues,
+  AttributeUtility,
+  UtilityProps,
+  EventUtility,
+  StyleUtility,
+  ChildUtility,
 } from "./types";
 
 import { enqueue } from "./flush";
@@ -37,12 +41,12 @@ export function decorate<E extends Element>(el: E, ...utils: Utility<E>[]): E {
   return use(...utils)(el);
 }
 
-export const addStyle: CreateStoreAwareUtility<Partial<CSSStyleDeclaration>> = <
+export const addStyle: StyleUtility<HTMLElement> = <
+  E extends HTMLElement,
   R extends Partial<CSSStyleDeclaration>,
-  S extends StoreMap,
-  E extends Element
+  S extends StoreMap = StoreMap
 >(
-  ...args: StoreAwareUtilityProps<R, S>
+  ...args: UtilityProps<R, S>
 ) => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
@@ -86,22 +90,24 @@ export const addStyle: CreateStoreAwareUtility<Partial<CSSStyleDeclaration>> = <
   };
 };
 
-export const addAttribute: CreateStoreAwareUtility<Record<string, string>> = <
-  R extends Record<string, string>,
-  S extends StoreMap,
-  E extends Element
+export const addAttribute: AttributeUtility<HTMLElement> = <
+  E extends HTMLElement,
+  R extends Partial<HTMLElement>,
+  S extends StoreMap = StoreMap
 >(
-  ...args: StoreAwareUtilityProps<R, S>
+  ...args: UtilityProps<R, S>
 ) => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
-      const [stores, mapper] = args as [S, (values: S) => R];
+      const [stores, mapper] = args;
       const apply = () => {
-        const values: Record<string, any> = {};
+        const values: StoreValues<S> = {} as StoreValues<S>;
         for (const key in stores) values[key] = stores[key].get();
-        const attrs = mapper(values as S);
+        const attrs = mapper(values);
         for (const key in attrs) {
-          el.setAttribute(key, attrs[key]);
+          if (key in el) {
+            (el as any)[key] = attrs[key];
+          }
         }
       };
 
@@ -117,8 +123,8 @@ export const addAttribute: CreateStoreAwareUtility<Record<string, string>> = <
     } else {
       const [attrs] = args as [R];
       for (const key in attrs) {
-        if (typeof attrs[key] === "string") {
-          el.setAttribute(key, attrs[key]);
+        if (key in el) {
+          (el as any)[key] = attrs[key];
         }
       }
     }
@@ -127,12 +133,11 @@ export const addAttribute: CreateStoreAwareUtility<Record<string, string>> = <
   };
 };
 
-export const addEvent = <
-  E extends Element,
-  K extends keyof HTMLElementEventMap
->(
-  type: K,
-  handler: (e: HTMLElementEventMap[K] & { currentTarget: E }) => void,
+export const addEvent: EventUtility<HTMLElement> = <E extends HTMLElement>(
+  type: keyof HTMLElementEventMap,
+  handler: (
+    e: HTMLElementEventMap[keyof HTMLElementEventMap] & { currentTarget: E }
+  ) => void,
   options?: AddEventListenerOptions
 ): Utility<E> =>
   createUtility((el) => {
@@ -176,12 +181,12 @@ const isSameNode = (a: Node[], b: Node[]) => {
   return true;
 };
 
-export const addChild: CreateStoreAwareUtility<TreeNode | TreeNode[]> = <
+export const addChild: ChildUtility<Element> = <
+  E extends Element,
   R extends TreeNode | TreeNode[],
-  S extends StoreMap,
-  E extends Element
+  S extends StoreMap = StoreMap
 >(
-  ...args: StoreAwareUtilityProps<R, S>
+  ...args: UtilityProps<R, S>
 ) => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
