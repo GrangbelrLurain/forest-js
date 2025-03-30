@@ -1,9 +1,17 @@
-import { Utility, StoreMap, CreateStoreAwareUtility, Store } from "./types";
+import {
+  Utility,
+  StoreMap,
+  CreateStoreAwareUtility,
+  StoreAwareUtilityProps,
+  TreeNode,
+} from "./types";
 
 import { enqueue } from "./flush";
 import { ensureMeta } from "./tree";
 
-export function createUtility<E extends HTMLElement>(fn: (el: E) => void): Utility<E> {
+export function createUtility<E extends Element>(
+  fn: (el: E) => void
+): Utility<E> {
   return (el: E) => {
     enqueue(() => fn(el));
     return el;
@@ -15,7 +23,7 @@ export function createUtility<E extends HTMLElement>(fn: (el: E) => void): Utili
  * @param utils - Array of utility functions to combine
  * @returns Combined utility function
  */
-export function use<E extends HTMLElement>(...utils: Utility<E>[]): Utility<E> {
+export function use<E extends Element>(...utils: Utility<E>[]): Utility<E> {
   return (el: E) => utils.reduce((acc, fn) => fn(acc), el);
 }
 
@@ -25,46 +33,73 @@ export function use<E extends HTMLElement>(...utils: Utility<E>[]): Utility<E> {
  * @param utils - Array of utility functions to apply
  * @returns Decorated element
  */
-export function decorate<E extends HTMLElement>(el: E): (...utils: Utility<E>[]) => E {
-  return (...utils) => use(...utils)(el);
+export function decorate<E extends Element>(el: E, ...utils: Utility<E>[]): E {
+  return use(...utils)(el);
 }
 
-export const addStyle: CreateStoreAwareUtility<StoreMap, Partial<CSSStyleDeclaration>, HTMLElement> = ([storeOrStyle, mapper]) => {
-  return createUtility((el) => {
-    if (typeof mapper === "function") {
-      // reactive mode
-      const stores = storeOrStyle as StoreMap;
+export const addStyle: CreateStoreAwareUtility<Partial<CSSStyleDeclaration>> = <
+  R extends Partial<CSSStyleDeclaration>,
+  S extends StoreMap,
+  E extends Element
+>(
+  ...args: StoreAwareUtilityProps<R, S>
+) => {
+  return (el: E) => {
+    if (args.length === 2 && typeof args[1] === "function") {
+      // Reactive mode
+      const [stores, mapper] = args as [S, (values: S) => R];
 
       const apply = () => {
         const values: Record<string, any> = {};
         for (const key in stores) values[key] = stores[key].get();
-        Object.assign(el.style, mapper(values));
+        if (el instanceof HTMLElement) {
+          Object.assign(el.style, mapper(values as S));
+        } else {
+          console.warn(
+            "[Forest Warning: addStyle] el is not an HTMLElement, style will not be applied"
+          );
+        }
       };
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
+      const unsubs = Object.values(stores).map((store) =>
+        store.subscribe(() => apply())
+      );
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();
       unsubs.forEach((unsub) => meta.storeBindings!.add(unsub));
     } else {
-      // static mode
-      Object.assign(el.style, storeOrStyle);
+      // Static mode
+      const [style] = args as [R];
+      if (el instanceof HTMLElement) {
+        Object.assign(el.style, style);
+      } else {
+        console.warn(
+          "[Forest Warning: addStyle] el is not an HTMLElement, style will not be applied"
+        );
+      }
     }
 
     return el;
-  });
+  };
 };
 
-export const addAttribute: CreateStoreAwareUtility<StoreMap, Record<string, string>, HTMLElement> = ([storeOrAttrs, mapper]) => {
-  return createUtility((el) => {
-    if (typeof mapper === "function") {
-      const stores = storeOrAttrs as StoreMap;
+export const addAttribute: CreateStoreAwareUtility<Record<string, string>> = <
+  R extends Record<string, string>,
+  S extends StoreMap,
+  E extends Element
+>(
+  ...args: StoreAwareUtilityProps<R, S>
+) => {
+  return (el: E) => {
+    if (args.length === 2 && typeof args[1] === "function") {
+      const [stores, mapper] = args as [S, (values: S) => R];
       const apply = () => {
         const values: Record<string, any> = {};
         for (const key in stores) values[key] = stores[key].get();
-        const attrs = mapper(values);
+        const attrs = mapper(values as S);
         for (const key in attrs) {
           el.setAttribute(key, attrs[key]);
         }
@@ -72,24 +107,30 @@ export const addAttribute: CreateStoreAwareUtility<StoreMap, Record<string, stri
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
+      const unsubs = Object.values(stores).map((store) =>
+        store.subscribe(() => enqueue(apply))
+      );
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();
       unsubs.forEach((unsub) => meta.storeBindings!.add(unsub));
-    } else if (typeof storeOrAttrs === "object") {
-      for (const key in storeOrAttrs) {
-        if (typeof storeOrAttrs[key] === "string") {
-          el.setAttribute(key, storeOrAttrs[key]);
+    } else {
+      const [attrs] = args as [R];
+      for (const key in attrs) {
+        if (typeof attrs[key] === "string") {
+          el.setAttribute(key, attrs[key]);
         }
       }
     }
 
     return el;
-  });
+  };
 };
 
-export const addEvent = <E extends HTMLElement, K extends keyof HTMLElementEventMap>(
+export const addEvent = <
+  E extends Element,
+  K extends keyof HTMLElementEventMap
+>(
   type: K,
   handler: (e: HTMLElementEventMap[K] & { currentTarget: E }) => void,
   options?: AddEventListenerOptions
@@ -105,15 +146,26 @@ export const addEvent = <E extends HTMLElement, K extends keyof HTMLElementEvent
     return el;
   });
 
-const flatten = (nodes: any[]): Node[] => {
-  return nodes.flatMap((node) => {
-    if (Array.isArray(node)) return flatten(node);
-    if (typeof node === "string" || typeof node === "number") {
-      return document.createTextNode(String(node));
-    }
-    if (node instanceof Node) return node;
-    return [];
-  });
+const toNode = (node: TreeNode): Node => {
+  if (typeof node === "string" || typeof node === "number") {
+    return document.createTextNode(String(node));
+  }
+  if (node === null || node === undefined) {
+    return document.createTextNode("");
+  }
+  return node;
+};
+
+const flatten = (nodes: TreeNode | TreeNode[]): Node[] => {
+  console.log(nodes);
+  if (Array.isArray(nodes)) {
+    return Array.from(nodes).flatMap((node) => {
+      if (Array.isArray(node)) return flatten(node);
+      if (node instanceof Node) return node;
+      return toNode(node);
+    });
+  }
+  return [toNode(nodes)];
 };
 
 const isSameNode = (a: Node[], b: Node[]) => {
@@ -124,15 +176,21 @@ const isSameNode = (a: Node[], b: Node[]) => {
   return true;
 };
 
-export const addChild: CreateStoreAwareUtility<StoreMap, HTMLElement[], HTMLElement> = ([storeOrChildren, mapper]) =>
-  createUtility((el) => {
-    if (typeof mapper === "function") {
-      const stores = storeOrChildren as StoreMap;
+export const addChild: CreateStoreAwareUtility<TreeNode | TreeNode[]> = <
+  R extends TreeNode | TreeNode[],
+  S extends StoreMap,
+  E extends Element
+>(
+  ...args: StoreAwareUtilityProps<R, S>
+) => {
+  return (el: E) => {
+    if (args.length === 2 && typeof args[1] === "function") {
+      const [stores, mapper] = args as [S, (values: S) => R];
       const apply = () => {
         const values: Record<string, any> = {};
         for (const key in stores) values[key] = stores[key].get();
 
-        const newChildren = flatten(mapper(values));
+        const newChildren = flatten(mapper(values as S));
 
         if (el.childNodes.length === 0) {
           newChildren.forEach((child) => el.appendChild(child));
@@ -143,26 +201,35 @@ export const addChild: CreateStoreAwareUtility<StoreMap, HTMLElement[], HTMLElem
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
+      const unsubs = Object.values(stores).map((store) =>
+        store.subscribe(() => enqueue(apply))
+      );
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();
       unsubs.forEach((unsub) => meta.storeBindings!.add(unsub));
-    } else if (Array.isArray(storeOrChildren)) {
-      flatten(storeOrChildren).forEach((child) => el.appendChild(child));
+    } else {
+      const [children] = args as [R];
+      flatten(children).forEach((child) => el.appendChild(child));
     }
 
     return el;
-  });
+  };
+};
 
 export const addClear =
-  <S extends StoreMap>(store: S, shouldClear: (values: Record<keyof S, ReturnType<S[keyof S]["get"]>>) => boolean): Utility<HTMLElement> =>
+  <S extends StoreMap>(
+    store: S,
+    shouldClear: (
+      values: Record<keyof S, ReturnType<S[keyof S]["get"]>>
+    ) => boolean
+  ): Utility<HTMLElement> =>
   (el) => {
     const meta = ensureMeta(el);
 
     const apply = () => {
       const values: Record<keyof S, ReturnType<S[keyof S]["get"]>> = {} as any;
-      for (const key in store) values[key] = store[key].get();
+      for (const key in store) values[key] = store[key].get() as any;
       if (shouldClear(values)) {
         meta.storeBindings?.forEach((unsub) => unsub());
         meta.storeBindings?.clear();

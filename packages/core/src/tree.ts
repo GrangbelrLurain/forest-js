@@ -1,9 +1,9 @@
 // core/index.ts
 import { DomElement, ElementName, ElementMeta } from "./types";
 
-const elementMeta = new WeakMap<HTMLElement, ElementMeta>();
+const elementMeta = new WeakMap<Element, ElementMeta>();
 
-export function ensureMeta(el: HTMLElement): ElementMeta {
+export function ensureMeta(el: Element): ElementMeta {
   if (!elementMeta.has(el)) elementMeta.set(el, {});
   return elementMeta.get(el)!;
 }

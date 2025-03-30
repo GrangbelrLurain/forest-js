@@ -2,21 +2,38 @@ export type ElementName = keyof HTMLElementTagNameMap;
 
 export type DomElement<T extends ElementName> = HTMLElementTagNameMap[T];
 
+export type TreeNode = Node | string | number | null | undefined;
+
 export type Store<T> = {
   get: () => T;
-  set: (next: T) => void;
+  set: (value: T) => void;
   update: (fn: (prev: T) => T) => void;
   subscribe: (fn: () => void) => () => void;
   unsubscribe: (fn: () => void) => void;
 };
 
-export type StoreMap = Record<string, Store<any>>;
+export type StoreMap<T = any> = {
+  [K in keyof T]: Store<T[K]>;
+};
 
-export type StoreAwareUtility<P extends StoreMap, R> = [props: R] | [stores: P, mapper: (values: P) => R];
+export type StoreValues<S extends StoreMap<any>> = {
+  [K in keyof S]: S[K] extends Store<infer T> ? T : never;
+};
 
-export type Utility<E extends HTMLElement> = (el: E) => E;
+export type StoreAwareUtilityProps<
+  R,
+  S extends StoreMap<any> = StoreMap<any>
+> = [S, (values: StoreValues<S>) => R] | [R];
 
-export type CreateStoreAwareUtility<S extends StoreMap, R, E extends HTMLElement> = ([storeOrStyle, mapper]: StoreAwareUtility<S, R>) => Utility<E>;
+export type Utility<E extends Element> = (el: E) => E;
+
+export type CreateStoreAwareUtility<T = unknown> = <
+  R extends T,
+  S extends StoreMap = StoreMap,
+  E extends Element = Element
+>(
+  ...args: StoreAwareUtilityProps<R, S>
+) => Utility<E>;
 
 export type Triggers = {
   [K in string]: (...args: never[]) => void;
