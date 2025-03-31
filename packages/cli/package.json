@@ -1,13 +1,14 @@
 {
   "name": "@forest-js/cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Internal CLI logic for forest-js templates",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "templates"
+    "readme.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "tsup index.ts --out-dir dist --format esm --minify",

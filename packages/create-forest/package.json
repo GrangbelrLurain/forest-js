@@ -1,13 +1,13 @@
 {
   "name": "create-forest",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Run forest-js CLI to scaffold a project",
   "bin": {
     "create-forest": "index.js"
   },
   "type": "module",
   "dependencies": {
-    "@forest-js/cli": "1.1.0"
+    "@forest-js/cli": "1.1.1"
   },
   "scripts": {
     "build": "tsc",
@@ -15,7 +15,9 @@
     "npm-publish": "npm publish"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "readme.md",
+    "LICENSE"
   ],
   "license": "MIT"
 }
