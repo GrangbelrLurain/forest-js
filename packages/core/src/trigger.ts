@@ -3,13 +3,7 @@ import { createUtility } from "./utilities";
 import { ensureMeta } from "./tree";
 import { enqueue } from "./flush";
 
-export const addTrigger: TriggerUtility<HTMLElement> = <
-  E extends HTMLElement,
-  R extends Triggers,
-  S extends StoreMap = StoreMap
->(
-  ...args: UtilityProps<R, S>
-) => {
+export const addTrigger: TriggerUtility = <E extends HTMLElement, R extends Triggers, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
   return createUtility((el: E) => {
     const meta = ensureMeta(el);
     const triggers = (meta.triggers ??= {});
@@ -23,9 +17,7 @@ export const addTrigger: TriggerUtility<HTMLElement> = <
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) =>
-        store.subscribe(() => enqueue(apply))
-      );
+      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
 
       meta.storeBindings ??= new Set();
       unsubs.forEach((unsub) => meta.storeBindings!.add(unsub));
@@ -38,9 +30,7 @@ export const addTrigger: TriggerUtility<HTMLElement> = <
   });
 };
 
-export const getTrigger = <T extends Triggers, E extends HTMLElement>(
-  el: E
-): Readonly<T> => {
+export const getTrigger = <T extends Triggers, E extends HTMLElement>(el: E): Readonly<T> => {
   const meta = ensureMeta(el);
   return meta.triggers as T;
 };

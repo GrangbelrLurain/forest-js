@@ -55,8 +55,8 @@ importers:
   packages/forest-pure-demo:
     dependencies:
       '@forest-js/core':
-        specifier: ^1.1.0
-        version: 1.1.0
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       typescript:
         specifier: ~5.7.2
@@ -361,9 +361,6 @@ packages:
 
   '@forest-js/cli@1.1.0':
     resolution: {integrity: sha512-9offMWX+RNwsXaOTj7RGf8mjfuZ6pVpcL+zq6ff57u6bFWnlIfoXKFQDWWmifmqJGCCuKc/VDNcmHgyYwwCZKw==}
-
-  '@forest-js/core@1.1.0':
-    resolution: {integrity: sha512-qphKMmo+PvZrda0Jh4rUc3XZuUHm/gkatCoJzpoQu7v3w3YYMIQ9Pte23kwDlx5EGSkMuQ4FE5aHFFS9+KG2fg==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -1434,8 +1431,6 @@ snapshots:
       unzipper: 0.12.3
     transitivePeerDependencies:
       - encoding
-
-  '@forest-js/core@1.1.0': {}
 
   '@isaacs/cliui@8.0.2':
     dependencies:

@@ -1,13 +1,4 @@
-import {
-  addAttribute,
-  createForest,
-  createStore,
-  tree,
-  decorate,
-  addStyle,
-  addChild,
-  addEvent,
-} from "@forest-js/core";
+import { addAttribute, createForest, createStore, tree, decorate, addStyle, addChild, addEvent } from "@forest-js/core";
 import CodeCard from "./components/CodeCard";
 
 const globalStyle = tree("style");
@@ -55,14 +46,8 @@ decorate(
     top: "0",
     left: "0",
     zIndex: "-10",
-    transform: `rotateY(${sectionRotate.x}deg) rotateX(${
-      sectionRotate.y
-    }deg) scale(${
-      1.25 * (1 + (Math.abs(sectionRotate.x) + Math.abs(sectionRotate.y)) / 100)
-    })`,
-    filter: `blur(${
-      (Math.abs(sectionRotate.x) + Math.abs(sectionRotate.y)) / 10
-    }px)`,
+    transform: `rotateY(${sectionRotate.x}deg) rotateX(${sectionRotate.y}deg) scale(${1.25 * (1 + (Math.abs(sectionRotate.x) + Math.abs(sectionRotate.y)) / 100)})`,
+    filter: `blur(${(Math.abs(sectionRotate.x) + Math.abs(sectionRotate.y)) / 10}px)`,
     transition: "transform 0.1s ease-out",
   }))
 );

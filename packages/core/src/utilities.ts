@@ -1,21 +1,9 @@
-import {
-  Utility,
-  StoreMap,
-  TreeNode,
-  StoreValues,
-  AttributeUtility,
-  UtilityProps,
-  EventUtility,
-  StyleUtility,
-  ChildUtility,
-} from "./types";
+import { Utility, StoreMap, TreeNode, StoreValues, AttributeUtility, UtilityProps, EventUtility, StyleUtility, ChildUtility } from "./types";
 
 import { enqueue } from "./flush";
 import { ensureMeta } from "./tree";
 
-export function createUtility<E extends Element>(
-  fn: (el: E) => void
-): Utility<E> {
+export function createUtility<E extends Element>(fn: (el: E) => void): Utility<E> {
   return (el: E) => {
     enqueue(() => fn(el));
     return el;
@@ -41,13 +29,7 @@ export function decorate<E extends Element>(el: E, ...utils: Utility<E>[]): E {
   return use(...utils)(el);
 }
 
-export const addStyle: StyleUtility<HTMLElement> = <
-  E extends HTMLElement,
-  R extends Partial<CSSStyleDeclaration>,
-  S extends StoreMap = StoreMap
->(
-  ...args: UtilityProps<R, S>
-) => {
+export const addStyle: StyleUtility = <E extends HTMLElement, R extends Partial<CSSStyleDeclaration>, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
       // Reactive mode
@@ -59,17 +41,13 @@ export const addStyle: StyleUtility<HTMLElement> = <
         if (el instanceof HTMLElement) {
           Object.assign(el.style, mapper(values as S));
         } else {
-          console.warn(
-            "[Forest Warning: addStyle] el is not an HTMLElement, style will not be applied"
-          );
+          console.warn("[Forest Warning: addStyle] el is not an HTMLElement, style will not be applied");
         }
       };
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) =>
-        store.subscribe(() => apply())
-      );
+      const unsubs = Object.values(stores).map((store) => store.subscribe(() => apply()));
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();
@@ -80,9 +58,7 @@ export const addStyle: StyleUtility<HTMLElement> = <
       if (el instanceof HTMLElement) {
         Object.assign(el.style, style);
       } else {
-        console.warn(
-          "[Forest Warning: addStyle] el is not an HTMLElement, style will not be applied"
-        );
+        console.warn("[Forest Warning: addStyle] el is not an HTMLElement, style will not be applied");
       }
     }
 
@@ -90,13 +66,7 @@ export const addStyle: StyleUtility<HTMLElement> = <
   };
 };
 
-export const addAttribute: AttributeUtility<HTMLElement> = <
-  E extends HTMLElement,
-  R extends Partial<HTMLElement>,
-  S extends StoreMap = StoreMap
->(
-  ...args: UtilityProps<R, S>
-) => {
+export const addAttribute: AttributeUtility = <E extends Element, R extends Partial<E>, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
       const [stores, mapper] = args;
@@ -113,9 +83,7 @@ export const addAttribute: AttributeUtility<HTMLElement> = <
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) =>
-        store.subscribe(() => enqueue(apply))
-      );
+      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();
@@ -133,11 +101,9 @@ export const addAttribute: AttributeUtility<HTMLElement> = <
   };
 };
 
-export const addEvent: EventUtility<HTMLElement> = <E extends HTMLElement>(
-  type: keyof HTMLElementEventMap,
-  handler: (
-    e: HTMLElementEventMap[keyof HTMLElementEventMap] & { currentTarget: E }
-  ) => void,
+export const addEvent: EventUtility = <E extends Element, K extends keyof HTMLElementEventMap>(
+  type: K,
+  handler: (e: HTMLElementEventMap[K] & { currentTarget: E }) => void,
   options?: AddEventListenerOptions
 ): Utility<E> =>
   createUtility((el) => {
@@ -181,13 +147,7 @@ const isSameNode = (a: Node[], b: Node[]) => {
   return true;
 };
 
-export const addChild: ChildUtility<Element> = <
-  E extends Element,
-  R extends TreeNode | TreeNode[],
-  S extends StoreMap = StoreMap
->(
-  ...args: UtilityProps<R, S>
-) => {
+export const addChild: ChildUtility = <E extends Element, R extends TreeNode | TreeNode[], S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
       const [stores, mapper] = args as [S, (values: S) => R];
@@ -206,9 +166,7 @@ export const addChild: ChildUtility<Element> = <
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) =>
-        store.subscribe(() => enqueue(apply))
-      );
+      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();
@@ -223,12 +181,7 @@ export const addChild: ChildUtility<Element> = <
 };
 
 export const addClear =
-  <S extends StoreMap>(
-    store: S,
-    shouldClear: (
-      values: Record<keyof S, ReturnType<S[keyof S]["get"]>>
-    ) => boolean
-  ): Utility<HTMLElement> =>
+  <S extends StoreMap>(store: S, shouldClear: (values: Record<keyof S, ReturnType<S[keyof S]["get"]>>) => boolean): Utility<HTMLElement> =>
   (el) => {
     const meta = ensureMeta(el);
 
