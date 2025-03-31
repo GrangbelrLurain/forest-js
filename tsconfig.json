@@ -1,4 +1,4 @@
 {
-  "files": [],
+  "files": ["packages/core/dist/index.d.ts"],
   "references": [{ "path": "packages/core" }]
 }

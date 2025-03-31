@@ -16,6 +16,20 @@ export type ElementMeta = {
 };
 
 /**
+ * Router Core Types
+ */
+
+export type Route = {
+  path: string;
+  component: () => HTMLElement;
+};
+
+export type RouterConfig = {
+  routes: Route[];
+  notFound?: () => HTMLElement;
+};
+
+/**
  * Utility Core Types
  */
 

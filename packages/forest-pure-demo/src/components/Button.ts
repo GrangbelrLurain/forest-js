@@ -1,11 +1,4 @@
-import {
-  createStore,
-  addEvent,
-  addStyle,
-  tree,
-  addChild,
-  use,
-} from "@forest-js/core";
+import { createStore, addEvent, addStyle, tree, addChild, use } from "@forest-js/core";
 
 const CountButton = () => {
   const count = createStore(0);
