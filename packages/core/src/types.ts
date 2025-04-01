@@ -19,14 +19,14 @@ export type ElementMeta = {
  * Router Core Types
  */
 
+export type RouterProps<T = any> = {
+  path: string;
+  state: T;
+};
+
 export type Route = {
   path: string;
   component: () => HTMLElement;
-};
-
-export type RouterConfig = {
-  routes: Route[];
-  notFound?: () => HTMLElement;
 };
 
 /**
