@@ -1,5 +1,5 @@
 // core/index.ts
-import { DomElement, ElementName, ElementMeta } from "./types";
+import { DomElement, ElementName, ElementMeta } from "@core/types";
 
 const elementMeta = new WeakMap<Element, ElementMeta>();
 

@@ -1,4 +1,20 @@
 {
-  "files": ["packages/core/dist/index.d.ts"],
-  "references": [{ "path": "packages/core" }]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": ["./packages/core/src/*"]
+    },
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "ESNext",
+    "isolatedModules": true,
+    "strict": true
+  },
+  "include": ["packages/*/src"],
+  "exclude": ["node_modules", "dist"]
 }

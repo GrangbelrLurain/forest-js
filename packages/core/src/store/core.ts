@@ -1,4 +1,4 @@
-import { Store } from "./types";
+import { Store } from "@core/types";
 
 export function createStore<T>(initial: T): Store<T> {
   let value = initial;

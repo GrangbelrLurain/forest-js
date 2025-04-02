@@ -1,4 +1,3 @@
-// core/createApp.ts
 let appInitialized = false;
 
 export function createForest(rootSelector: string, render: () => HTMLElement) {

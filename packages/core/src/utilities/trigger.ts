@@ -1,7 +1,6 @@
-import { Triggers, StoreMap, TriggerUtility, UtilityProps } from "./types";
-import { createUtility } from "./utilities";
-import { ensureMeta } from "./tree";
-import { enqueue } from "./flush";
+import { ensureMeta, enqueue } from "@core/dom";
+import { StoreMap, TriggerUtility, Triggers, UtilityProps } from "@core/types";
+import { createUtility } from "./core";
 
 export const addTrigger: TriggerUtility = <E extends HTMLElement, R extends Triggers, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
   return createUtility((el: E) => {
