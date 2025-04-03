@@ -1,4 +1,10 @@
-import { ChildUtility, StoreMap, TreeNode, UtilityProps } from "@core/types";
+import {
+  Child,
+  ChildUtility,
+  StoreMap,
+  TreeNode,
+  UtilityProps,
+} from "@core/types";
 import { enqueue, ensureMeta } from "@core/dom";
 
 const toNode = (node: TreeNode): Node => {
@@ -30,33 +36,93 @@ const isSameNode = (a: Node[], b: Node[]) => {
   }
   return true;
 };
-export const addChild: ChildUtility = <E extends HTMLElement, R extends TreeNode | TreeNode[], S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
+
+const processPromiseResult = <R extends Child>(result: R | { default: R }) => {
+  if (result && typeof result === "object" && "default" in result) {
+    return result.default;
+  }
+  return result as R;
+};
+
+export const addChild: ChildUtility = <
+  E extends HTMLElement,
+  R extends Child | Promise<Child> | Promise<{ default: Child }>,
+  S extends StoreMap = StoreMap
+>(
+  ...args: UtilityProps<R, S>
+) => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
-      const [stores, mapper] = args as [S, (values: S) => R];
-      const apply = () => {
+      const [stores, mapper] = args as [S, (values: S) => R | Promise<R>];
+      const placeholder = document.createTextNode(""); // 로딩 중 placeholder
+      el.appendChild(placeholder);
+
+      const apply = async () => {
         const values: Record<string, any> = {};
         for (const key in stores) values[key] = stores[key].get();
 
-        const newChildren = flatten(mapper(values as S));
+        try {
+          const result = mapper(values as S);
 
-        if (el.childNodes.length === 0) {
-          newChildren.forEach((child) => el.appendChild(child));
-        } else if (!isSameNode(Array.from(el.childNodes), newChildren)) {
-          el.replaceChildren(...newChildren);
+          const processedResult =
+            result instanceof Promise
+              ? processPromiseResult(await result)
+              : (result as Child);
+
+          const children = flatten(processedResult);
+
+          if (placeholder.parentNode === el) {
+            // placeholder 대체
+            el.insertBefore(children[0], placeholder);
+            el.removeChild(placeholder);
+            children.slice(1).forEach((child) => el.appendChild(child));
+          } else {
+            // 이미 요소가 존재하면 업데이트
+            const oldChildren = Array.from(el.childNodes);
+            if (!isSameNode(oldChildren, children)) {
+              el.replaceChildren(...children);
+            }
+          }
+        } catch (error) {
+          console.error("Error loading dynamic component:", error);
         }
       };
 
       apply();
 
-      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
+      // 스토어 구독
+      const unsubs = Object.values(stores).map((store) =>
+        store.subscribe(() => enqueue(apply))
+      );
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();
       unsubs.forEach((unsub) => meta.storeBindings!.add(unsub));
     } else {
       const [children] = args as [R];
-      flatten(children).forEach((child) => el.appendChild(child));
+
+      if (children instanceof Promise) {
+        const placeholder = document.createTextNode("");
+        el.appendChild(placeholder);
+
+        children
+          .then(async (result) => {
+            const processedResult = processPromiseResult(result);
+            const nodes = flatten(processedResult);
+
+            if (placeholder.parentNode === el) {
+              el.insertBefore(nodes[0], placeholder);
+              el.removeChild(placeholder);
+              nodes.slice(1).forEach((node) => el.appendChild(node));
+            }
+          })
+          .catch((error) => {
+            console.error("Error loading dynamic children:", error);
+          });
+      } else {
+        // 일반 동기 처리 (기존 코드)
+        flatten(children).forEach((child) => el.appendChild(child));
+      }
     }
 
     return el;

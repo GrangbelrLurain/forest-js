@@ -1,24 +1,21 @@
 import { createForest, decorate, tree, addChild } from "@forest-js/core";
-import { route } from "./app/router";
-
-import Home from "./pages/home";
-import About from "./pages/about";
-import NotFound from "./pages/404";
+import { routerStore } from "./app/router";
 
 const app = createForest("#app", () =>
   decorate(
     tree("div"),
-    addChild([
-      route({
-        path: "/",
-        component: (status) => {
-          console.log(status);
-          return status === "success" ? Home : null;
-        },
-      }),
-      route({ path: "/about", component: (status) => (status === "success" ? About : null) }),
-      route({ path: "/404", component: (status) => (status === "success" ? NotFound : null) }),
-    ])
+    addChild({ routerStore }, ({ routerStore }) => {
+      if (routerStore?.path === "/") {
+        return import("./pages/home");
+      }
+      if (routerStore?.path === "/about") {
+        return import("./pages/about");
+      }
+      if (routerStore?.path === "/404") {
+        return import("./pages/404");
+      }
+      return import("./pages/404");
+    })
   )
 );
 

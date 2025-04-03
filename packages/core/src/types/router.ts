@@ -31,9 +31,5 @@ export type RouteStatus = "idle" | "loading" | "notFound" | "success";
 export type RouterProps<T = any> = {
   path: string;
   state: T;
-};
-
-export type Route = {
-  path: string;
-  component: (status: RouteStatus) => TreeNode;
+  status: RouteStatus;
 };

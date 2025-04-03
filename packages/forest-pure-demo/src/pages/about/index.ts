@@ -1,5 +1,5 @@
-import { tree } from "@forest-js/core";
+import { tree, decorate, addChild } from "@forest-js/core";
 
-const About = tree("main");
+const About = decorate(tree("main"), addChild(["about", "about-title"]));
 
 export default About;
