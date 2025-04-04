@@ -1,0 +1,15 @@
+{
+  "out": "./packages/docs",
+  "entryPoints": ["packages/core/src/index.ts"],
+  "entryPointStrategy": "resolve",
+  "excludePrivate": true,
+  "excludeExternals": true,
+  "includeVersion": true,
+  "readme": "none",
+  "name": "Forest.js Core Documentation",
+  "theme": "default",
+  "categorizeByGroup": true,
+  "sort": ["source-order"],
+  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-merge-modules"],
+  "mergeModulesMergeMode": "module"
+}

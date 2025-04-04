@@ -12,7 +12,9 @@
     "publish:cli": "pnpm --filter cli npm-publish",
     "publish:create": "pnpm --filter create-forest npm-publish",
     "dev:pure": "pnpm --filter forest-pure-demo dev",
-    "dev:tailwind": "pnpm --filter forest-tailwind-demo dev"
+    "dev:tailwind": "pnpm --filter forest-tailwind-demo dev",
+    "generate:doc": "pnpm exec ts-node --project scripts/tsconfig.json scripts/generate-document.script.ts",
+    "generate:readme": "pnpm exec ts-node --project scripts/tsconfig.json scripts/generate-readme.script.ts"
   },
   "keywords": [
     "DOM"
@@ -23,6 +25,9 @@
   "devDependencies": {
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.13",
+    "typedoc": "^0.28.1",
+    "typedoc-plugin-markdown": "^4.6.1",
+    "typedoc-plugin-merge-modules": "^7.0.0",
     "typescript": "^5.8.2"
   },
   "packageManager": "pnpm@9.14.2"

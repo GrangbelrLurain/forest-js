@@ -1,5 +1,5 @@
-import { enqueue, ensureMeta } from "@core/dom";
-import { EventUtility, StoreMap, Utility } from "@core/types";
+import { ensureMeta } from "@core/dom";
+import { EventUtility, Utility } from "@core/types";
 import { createUtility } from "./core";
 
 export const addEvent: EventUtility = <E extends Element, K extends keyof HTMLElementEventMap>(
@@ -17,22 +17,3 @@ export const addEvent: EventUtility = <E extends Element, K extends keyof HTMLEl
     el.addEventListener(type, meta.listeners[type] as EventListener, options);
     return el;
   });
-
-export const addClear =
-  <S extends StoreMap>(store: S, shouldClear: (values: Record<keyof S, ReturnType<S[keyof S]["get"]>>) => boolean): Utility<HTMLElement> =>
-  (el) => {
-    const meta = ensureMeta(el);
-
-    const apply = () => {
-      const values: Record<keyof S, ReturnType<S[keyof S]["get"]>> = {} as any;
-      for (const key in store) values[key] = store[key].get() as any;
-      if (shouldClear(values)) {
-        meta.storeBindings?.forEach((unsub) => unsub());
-        meta.storeBindings?.clear();
-      }
-    };
-
-    enqueue(apply);
-
-    return el;
-  };
