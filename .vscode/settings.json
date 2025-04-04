@@ -10,8 +10,23 @@
     ["className:\\s*'([^']*)'", "'([^']*)'"]
   ],
   "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
     "strings": true
   },
   "css.validate": false,
-  "tailwindCSS.emmetCompletions": true
+  "tailwindCSS.emmetCompletions": true,
+  "editor.autoIndent": "keep",
+  "editor.formatOnType": false,
+  "editor.tabCompletion": "on",
+  "editor.trimAutoWhitespace": false,
+  "editor.snippetSuggestions": "top",
+  "[typescript]": {
+    "editor.autoIndent": "keep",
+    "editor.formatOnType": false
+  },
+  "[javascript]": {
+    "editor.autoIndent": "keep",
+    "editor.formatOnType": false
+  }
 }
