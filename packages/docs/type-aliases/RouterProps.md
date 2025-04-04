@@ -1,4 +1,4 @@
-[**Forest.js Core Documentation v1.1.3**](../README.md)
+[**Forest.js Core Documentation v1.2.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **RouterProps**\<`T`\> = `object`
 
-Defined in: [types/router.ts:75](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/router.ts#L75)
+Defined in: [types/router.ts:75](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/router.ts#L75)
 
 Properties of the current route.
 Represents the state and metadata associated with a specific route.
@@ -45,7 +45,7 @@ Type of state data associated with the route.
 
 > **path**: `string`
 
-Defined in: [types/router.ts:77](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/router.ts#L77)
+Defined in: [types/router.ts:77](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/router.ts#L77)
 
 The current path of the router.
 
@@ -55,7 +55,7 @@ The current path of the router.
 
 > **state**: `T`
 
-Defined in: [types/router.ts:79](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/router.ts#L79)
+Defined in: [types/router.ts:79](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/router.ts#L79)
 
 The state data associated with the current route.
 
@@ -65,6 +65,6 @@ The state data associated with the current route.
 
 > **status**: [`RouteStatus`](RouteStatus.md)
 
-Defined in: [types/router.ts:81](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/router.ts#L81)
+Defined in: [types/router.ts:81](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/router.ts#L81)
 
 The current status of the route.

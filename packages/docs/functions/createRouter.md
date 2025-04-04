@@ -1,4 +1,4 @@
-[**Forest.js Core Documentation v1.1.3**](../README.md)
+[**Forest.js Core Documentation v1.2.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **createRouter**(`options`): `object`
 
-Defined in: [router/core.ts:6](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/router/core.ts#L6)
+Defined in: [router/core.ts:6](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/router/core.ts#L6)
 
 ## Parameters
 

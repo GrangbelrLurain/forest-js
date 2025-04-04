@@ -1,4 +1,4 @@
-[**Forest.js Core Documentation v1.1.3**](../README.md)
+[**Forest.js Core Documentation v1.2.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **Store**\<`T`\> = `object`
 
-Defined in: [types/store.ts:14](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/store.ts#L14)
+Defined in: [types/store.ts:14](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/store.ts#L14)
 
 Reactive store for state management.
 Stores a value and provides reactive updates.
@@ -36,7 +36,7 @@ Type of value stored in the store
 
 > **get**: () => `T`
 
-Defined in: [types/store.ts:19](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/store.ts#L19)
+Defined in: [types/store.ts:19](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/store.ts#L19)
 
 Get the current value from the store.
 
@@ -52,7 +52,7 @@ The current store value.
 
 > **set**: (`value`) => `void`
 
-Defined in: [types/store.ts:24](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/store.ts#L24)
+Defined in: [types/store.ts:24](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/store.ts#L24)
 
 Set a new value in the store and notify subscribers.
 
@@ -74,7 +74,7 @@ The new value to store.
 
 > **update**: (`fn`) => `void`
 
-Defined in: [types/store.ts:29](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/store.ts#L29)
+Defined in: [types/store.ts:29](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/store.ts#L29)
 
 Update the store value using a function and notify subscribers.
 
@@ -96,7 +96,7 @@ A function that takes the previous value and returns the new value.
 
 > **subscribe**: (`fn`) => () => `void`
 
-Defined in: [types/store.ts:40](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/store.ts#L40)
+Defined in: [types/store.ts:40](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/store.ts#L40)
 
 Subscribe to store changes.
 
@@ -131,7 +131,7 @@ unsubscribe(); // To stop listening
 
 > **unsubscribe**: (`fn`) => `void`
 
-Defined in: [types/store.ts:46](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/store.ts#L46)
+Defined in: [types/store.ts:46](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/store.ts#L46)
 
 Unsubscribe a previously registered callback.
 Typically called using the function returned from `subscribe()`.

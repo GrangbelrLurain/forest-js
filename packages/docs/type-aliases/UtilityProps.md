@@ -1,4 +1,4 @@
-[**Forest.js Core Documentation v1.1.3**](../README.md)
+[**Forest.js Core Documentation v1.2.0**](../README.md)
 
 ***
 
@@ -8,7 +8,7 @@
 
 > **UtilityProps**\<`R`, `S`\> = [`DirectProps`](DirectProps.md)\<`R`\> \| \[`S`, (`values`) => `R`\]
 
-Defined in: [types/utilities.ts:57](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/utilities.ts#L57)
+Defined in: [types/utilities.ts:57](https://github.com/GrangbelrLurain/forest-js/blob/3b9f0f1236af55b74c90cc45f6935444ec94c11b/packages/core/src/types/utilities.ts#L57)
 
 Union type for props that can be either direct or store-derived.
 Combines both direct and reactive prop types.

@@ -1,8 +1,8 @@
-**Forest.js Core Documentation v1.1.3**
+**Forest.js Core Documentation v1.2.0**
 
 ***
 
-# Forest.js Core Documentation v1.1.3
+# Forest.js Core Documentation v1.2.0
 
 ## Type Aliases
 
