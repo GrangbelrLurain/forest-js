@@ -1,11 +1,10 @@
-
 <a name="readmemd"></a>
 
-**Forest.js Core Documentation v1.1.3**
+**Forest.js Core Documentation v1.2.0**
 
-***
+---
 
-# Forest.js Core Documentation v1.1.3
+# Forest.js Core Documentation v1.2.0
 
 ## Type Aliases
 
@@ -55,12 +54,11 @@
 - [createStore](#functionscreatestoremd)
 - [getTrigger](#functionsgettriggermd)
 
-
 <a name="functionscreateforestmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / createForest
 
@@ -84,12 +82,11 @@ Defined in: [dom/app.ts:3](https://github.com/GrangbelrLurain/forest-js/blob/bdd
 
 `void`
 
-
 <a name="functionscreateroutermd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / createRouter
 
@@ -215,12 +212,11 @@ Defined in: [router/core.ts:6](https://github.com/GrangbelrLurain/forest-js/blob
 
 `void`
 
-
 <a name="functionscreatestoremd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / createStore
 
@@ -246,12 +242,11 @@ Defined in: [store/core.ts:3](https://github.com/GrangbelrLurain/forest-js/blob/
 
 [`Store`](#type-aliasesstoremd)\<`T`\>
 
-
 <a name="functionsgettriggermd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / getTrigger
 
@@ -265,11 +260,11 @@ Defined in: [utilities/trigger.ts:32](https://github.com/GrangbelrLurain/forest-
 
 ### T
 
-`T` *extends* [`Triggers`](#type-aliasestriggersmd)
+`T` _extends_ [`Triggers`](#type-aliasestriggersmd)
 
 ### E
 
-`E` *extends* `HTMLElement`
+`E` _extends_ `HTMLElement`
 
 ## Parameters
 
@@ -281,12 +276,11 @@ Defined in: [utilities/trigger.ts:32](https://github.com/GrangbelrLurain/forest-
 
 `Readonly`\<`T`\>
 
-
 <a name="functionstreemd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / tree
 
@@ -300,7 +294,7 @@ Defined in: [dom/core.ts:11](https://github.com/GrangbelrLurain/forest-js/blob/b
 
 ### T
 
-`T` *extends* keyof `HTMLElementTagNameMap`
+`T` _extends_ keyof `HTMLElementTagNameMap`
 
 ## Parameters
 
@@ -312,12 +306,11 @@ Defined in: [dom/core.ts:11](https://github.com/GrangbelrLurain/forest-js/blob/b
 
 [`DomElement`](#type-aliasesdomelementmd)\<`T`\>
 
-
 <a name="type-aliasesattributeutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / AttributeUtility
 
@@ -331,19 +324,19 @@ Defined in: [types/utilities.ts:133](https://github.com/GrangbelrLurain/forest-j
 
 ### E
 
-`E` *extends* `Element`
+`E` _extends_ `Element`
 
 Element type.
 
 ### R
 
-`R` *extends* `Partial`\<`E`\>
+`R` _extends_ `Partial`\<`E`\>
 
 Object with attributes to add.
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
 
 StoreMap type when used reactively.
 
@@ -366,17 +359,14 @@ Supports reactive attributes when using stores.
 ## Example
 
 ```ts
-const addTitle = addAttribute<HTMLDivElement, { title: string }>(
-  { title: "Hello" }
-)(MyElement);
+const addTitle = addAttribute<HTMLDivElement, { title: string }>({ title: "Hello" })(MyElement);
 ```
-
 
 <a name="type-aliaseschildmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / Child
 
@@ -388,12 +378,11 @@ Defined in: [types/utilities.ts:210](https://github.com/GrangbelrLurain/forest-j
 
 Type representing a child or children that can be added to an element
 
-
 <a name="type-aliaseschildutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / ChildUtility
 
@@ -409,19 +398,19 @@ Utility for adding children to an element
 
 ### E
 
-`E` *extends* `HTMLElement`
+`E` _extends_ `HTMLElement`
 
 Element type
 
 ### R
 
-`R` *extends* [`Child`](#type-aliaseschildmd) \| `Promise`\<[`Child`](#type-aliaseschildmd)\> \| `Promise`\<\{ `default`: [`Child`](#type-aliaseschildmd); \}\>
+`R` _extends_ [`Child`](#type-aliaseschildmd) \| `Promise`\<[`Child`](#type-aliaseschildmd)\> \| `Promise`\<\{ `default`: [`Child`](#type-aliaseschildmd); \}\>
 
 Child content to add (can be promise or dynamic import)
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
 
 StoreMap type when used reactively
 
@@ -445,12 +434,11 @@ StoreMap type when used reactively
 
 `E`
 
-
 <a name="type-aliasesclearutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / ClearUtility
 
@@ -466,7 +454,7 @@ Clears store bindings when a specific condition is met.
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd)
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd)
 
 StoreMap type.
 
@@ -496,12 +484,11 @@ A utility for handling store cleanup.
 const clearStore = addClear(myStore, (values) => values.name === "John")(MyElement);
 ```
 
-
 <a name="type-aliasescreaterouteroptionsmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / CreateRouterOptions
 
@@ -529,15 +516,14 @@ const { router, routerStore } = createRouter({ isMultiInstance: true }); // <- "
 Defined in: [types/router.ts:25](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/types/router.ts#L25)
 
 Specifies whether multiple router instances can be created.
-   If true, allows multiple independent routers to coexist.
-   If false, a single global router is used.
-
+If true, allows multiple independent routers to coexist.
+If false, a single global router is used.
 
 <a name="type-aliasescreateutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / CreateUtility
 
@@ -554,7 +540,7 @@ Useful for batching updates to avoid layout thrashing.
 
 ### E
 
-`E` *extends* `Element`
+`E` _extends_ `Element`
 
 Element type.
 
@@ -581,12 +567,11 @@ const delayedUpdate = createUtility<HTMLDivElement>((el) => {
 });
 ```
 
-
 <a name="type-aliasesdecorateutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / DecorateUtility
 
@@ -603,7 +588,7 @@ Similar to UseUtility but applies immediately.
 
 ### E
 
-`E` *extends* `Element`
+`E` _extends_ `Element`
 
 Element type.
 
@@ -627,12 +612,11 @@ Element type.
 decorate(MyElement, addAttribute({ "data-active": true }));
 ```
 
-
 <a name="type-aliasesdirectpropsmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / DirectProps
 
@@ -659,12 +643,11 @@ The result type.
 const directProps: DirectProps<number> = [42];
 ```
 
-
 <a name="type-aliasesdomelementmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / DomElement
 
@@ -681,7 +664,7 @@ This is useful when creating or manipulating elements dynamically.
 
 ### T
 
-`T` *extends* [`ElementName`](#type-aliaseselementnamemd)
+`T` _extends_ [`ElementName`](#type-aliaseselementnamemd)
 
 The HTML element tag name.
 
@@ -691,12 +674,11 @@ The HTML element tag name.
 const div = tree("div"); // <- "const div" is a DomElement
 ```
 
-
 <a name="type-aliaseselementmetamd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / ElementMeta
 
@@ -712,7 +694,7 @@ Used internally by Forest.js to maintain element states and bindings.
 ## Example
 
 ```ts
-const elementMeta: ElementMeta = ensureMeta(el) // <- "elementMeta" is a ElementMeta
+const elementMeta: ElementMeta = ensureMeta(el); // <- "elementMeta" is a ElementMeta
 
 elementMeta.listeners = {
   click: () => console.log("Clicked!"),
@@ -735,7 +717,7 @@ Defined in: [types/dom.ts:65](https://github.com/GrangbelrLurain/forest-js/blob/
 
 Event listeners attached to the element.
 
-***
+---
 
 ### triggers?
 
@@ -745,7 +727,7 @@ Defined in: [types/dom.ts:67](https://github.com/GrangbelrLurain/forest-js/blob/
 
 Custom triggers for element-specific actions.
 
-***
+---
 
 ### mounted?
 
@@ -755,7 +737,7 @@ Defined in: [types/dom.ts:69](https://github.com/GrangbelrLurain/forest-js/blob/
 
 Indicates whether the element is currently mounted in the DOM.
 
-***
+---
 
 ### storeBindings?
 
@@ -765,12 +747,11 @@ Defined in: [types/dom.ts:71](https://github.com/GrangbelrLurain/forest-js/blob/
 
 A set of functions to clean up store bindings.
 
-
 <a name="type-aliaseselementnamemd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / ElementName
 
@@ -789,12 +770,11 @@ Utilized to dynamically create or manipulate HTML elements.
 const div = tree("div"); // <- "div" is a valid HTML element name
 ```
 
-
 <a name="type-aliaseseventutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / EventUtility
 
@@ -811,13 +791,13 @@ Allows specifying event types and handlers.
 
 ### E
 
-`E` *extends* `Element`
+`E` _extends_ `Element`
 
 Element type.
 
 ### K
 
-`K` *extends* keyof `HTMLElementEventMap`
+`K` _extends_ keyof `HTMLElementEventMap`
 
 Event key.
 
@@ -845,12 +825,11 @@ Event key.
 const onClick = addEvent("click", (e) => console.log(e.currentTarget))(MyElement);
 ```
 
-
 <a name="type-aliasesgettriggermd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / GetTrigger
 
@@ -866,13 +845,13 @@ Utility for getting triggers from an element for use outside of component
 
 ### T
 
-`T` *extends* [`Triggers`](#type-aliasestriggersmd)
+`T` _extends_ [`Triggers`](#type-aliasestriggersmd)
 
 Trigger object type
 
 ### E
 
-`E` *extends* `HTMLElement`
+`E` _extends_ `HTMLElement`
 
 Element type (defaults to HTMLElement)
 
@@ -893,12 +872,11 @@ const triggers = getTriggers(MyElement);
 triggers.customTrigger();
 ```
 
-
 <a name="type-aliasesroutestatusmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / RouteStatus
 
@@ -923,17 +901,14 @@ Used to indicate the current status of the router or route.
 ```ts
 const { routerStore } = createRouter();
 
-const app = createForest("#app", () => addChild({ routerStore }, ({ routerStore }) =>
-  routerStore.status === "loading" ? LoadingComponent() : MainComponent()
-)(tree("div")));
+const app = createForest("#app", () => addChild({ routerStore }, ({ routerStore }) => (routerStore.status === "loading" ? LoadingComponent() : MainComponent()))(tree("div")));
 ```
-
 
 <a name="type-aliasesrouterpropsmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / RouterProps
 
@@ -951,17 +926,19 @@ Represents the state and metadata associated with a specific route.
 ```ts
 const { routerStore } = createRouter();
 
-const app = createForest("#app", () => addChild({ routerStore }, ({ routerStore }) => {
-  const { path, state, status } = routerStore; // <- "routerStore" is a RouterProps
-  if (status === "loading") {
-    return LoadingComponent();
-  } else if (path === "/") {
-    return HomeComponent();
-  } else if (path === "/about") {
-    return AboutComponent();
-  }
-  return NotFoundComponent();
-})(tree("div")));
+const app = createForest("#app", () =>
+  addChild({ routerStore }, ({ routerStore }) => {
+    const { path, state, status } = routerStore; // <- "routerStore" is a RouterProps
+    if (status === "loading") {
+      return LoadingComponent();
+    } else if (path === "/") {
+      return HomeComponent();
+    } else if (path === "/about") {
+      return AboutComponent();
+    }
+    return NotFoundComponent();
+  })(tree("div"))
+);
 ```
 
 ## Type Parameters
@@ -982,7 +959,7 @@ Defined in: [types/router.ts:77](https://github.com/GrangbelrLurain/forest-js/bl
 
 The current path of the router.
 
-***
+---
 
 ### state
 
@@ -992,7 +969,7 @@ Defined in: [types/router.ts:79](https://github.com/GrangbelrLurain/forest-js/bl
 
 The state data associated with the current route.
 
-***
+---
 
 ### status
 
@@ -1002,12 +979,11 @@ Defined in: [types/router.ts:81](https://github.com/GrangbelrLurain/forest-js/bl
 
 The current status of the route.
 
-
 <a name="type-aliasesstoremd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / Store
 
@@ -1053,7 +1029,7 @@ Get the current value from the store.
 
 The current store value.
 
-***
+---
 
 ### set()
 
@@ -1075,7 +1051,7 @@ The new value to store.
 
 `void`
 
-***
+---
 
 ### update()
 
@@ -1097,7 +1073,7 @@ A function that takes the previous value and returns the new value.
 
 `void`
 
-***
+---
 
 ### subscribe()
 
@@ -1132,7 +1108,7 @@ const unsubscribe = myStore.subscribe(() => console.log("Updated!"));
 unsubscribe(); // To stop listening
 ```
 
-***
+---
 
 ### unsubscribe()
 
@@ -1155,12 +1131,11 @@ The function that was initially registered.
 
 `void`
 
-
 <a name="type-aliasesstoremapmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / StoreMap
 
@@ -1186,18 +1161,17 @@ Optional type for the store values
 ```ts
 const firstStore = createStore({ value: "Hello" });
 const secondStore = createStore({ value: "World" });
-const storeMap: StoreMap<{ first: string, second: string }> = {
+const storeMap: StoreMap<{ first: string; second: string }> = {
   first: firstStore,
-  second: secondStore
+  second: secondStore,
 };
 ```
 
-
 <a name="type-aliasesstorepropsmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / StoreProps
 
@@ -1220,7 +1194,7 @@ The result type.
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
 
 StoreMap type.
 
@@ -1230,12 +1204,11 @@ StoreMap type.
 const reactiveProps: StoreProps<string, MyStoreMap> = [{ myStore }, ({ myStore }) => myStore.values];
 ```
 
-
 <a name="type-aliasesstorevaluesmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / StoreValues
 
@@ -1252,7 +1225,7 @@ Transforms a map of stores into a map of their inner values.
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd)\<`any`\>
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd)\<`any`\>
 
 StoreMap to extract values from
 
@@ -1264,12 +1237,11 @@ const myStoreMap: StoreMap<{ myStore: string }> = { myStore };
 const myValues: StoreValues<typeof myStoreMap> = { myStore: "Hello" };
 ```
 
-
 <a name="type-aliasesstyleutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / StyleUtility
 
@@ -1286,19 +1258,19 @@ Supports reactive styles when using stores.
 
 ### R
 
-`R` *extends* `Partial`\<`CSSStyleDeclaration`\>
+`R` _extends_ `Partial`\<`CSSStyleDeclaration`\>
 
 Style properties to apply.
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
 
 StoreMap type when used reactively.
 
 ### E
 
-`E` *extends* `HTMLElement` = `HTMLElement`
+`E` _extends_ `HTMLElement` = `HTMLElement`
 
 Element type (defaults to HTMLElement).
 
@@ -1315,17 +1287,14 @@ Element type (defaults to HTMLElement).
 ## Example
 
 ```ts
-const setColor = addStyle<HTMLDivElement, { color: string }>(
-  { color: "red" }
-)(MyElement);
+const setColor = addStyle<HTMLDivElement, { color: string }>({ color: "red" })(MyElement);
 ```
-
 
 <a name="type-aliasestreenodemd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / TreeNode
 
@@ -1347,12 +1316,11 @@ const node2: TreeNode = "Text content"; // <- "node2" is a TreeNode
 const node3: TreeNode = null; // <- "node3" is a TreeNode
 ```
 
-
 <a name="type-aliasestriggerutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / TriggerUtility
 
@@ -1368,19 +1336,19 @@ Utility for adding triggers to an element
 
 ### R
 
-`R` *extends* [`Triggers`](#type-aliasestriggersmd)
+`R` _extends_ [`Triggers`](#type-aliasestriggersmd)
 
 Trigger object to add
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
 
 StoreMap type when used reactively
 
 ### E
 
-`E` *extends* `HTMLElement` = `HTMLElement`
+`E` _extends_ `HTMLElement` = `HTMLElement`
 
 Element type (defaults to HTMLElement)
 
@@ -1402,12 +1370,11 @@ const triggers = getTriggers(MyElement);
 triggers.customTrigger();
 ```
 
-
 <a name="type-aliasestriggersmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / Triggers
 
@@ -1427,12 +1394,11 @@ const triggers = getTriggers(MyElement);
 triggers.customTrigger();
 ```
 
-
 <a name="type-aliasesuseutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / UseUtility
 
@@ -1449,7 +1415,7 @@ Sequentially applies each utility to the element.
 
 ### E
 
-`E` *extends* `Element`
+`E` _extends_ `Element`
 
 Element type.
 
@@ -1466,19 +1432,16 @@ Element type.
 ## Example
 
 ```ts
-const combinedUtility = use<HTMLDivElement>(
-  addAttribute({ "data-active": true })
-);
+const combinedUtility = use<HTMLDivElement>(addAttribute({ "data-active": true }));
 
 combinedUtility(MyElement);
 ```
 
-
 <a name="type-aliasesutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / Utility
 
@@ -1495,7 +1458,7 @@ Typically used to enhance or manipulate the DOM element in a declarative way.
 
 ### E
 
-`E` *extends* `Element`
+`E` _extends_ `Element`
 
 The type of element the utility operates on.
 
@@ -1518,12 +1481,11 @@ const addClass: Utility<HTMLDivElement> = (el) => {
 };
 ```
 
-
 <a name="type-aliasesutilitypropsmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / UtilityProps
 
@@ -1546,7 +1508,7 @@ The result type.
 
 ### S
 
-`S` *extends* [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
+`S` _extends_ [`StoreMap`](#type-aliasesstoremapmd) = [`StoreMap`](#type-aliasesstoremapmd)
 
 StoreMap type.
 
@@ -1558,12 +1520,11 @@ const utilityProps: UtilityProps<string, typeof myStore> = [{ myStore }, ({ mySt
 const utilityProps: UtilityProps<string> = ["Hello"];
 ```
 
-
 <a name="variablesaddattributemd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / addAttribute
 
@@ -1573,12 +1534,11 @@ const utilityProps: UtilityProps<string> = ["Hello"];
 
 Defined in: [utilities/attribute.ts:9](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/utilities/attribute.ts#L9)
 
-
 <a name="variablesaddchildmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / addChild
 
@@ -1588,12 +1548,11 @@ Defined in: [utilities/attribute.ts:9](https://github.com/GrangbelrLurain/forest
 
 Defined in: [utilities/child.ts:47](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/utilities/child.ts#L47)
 
-
 <a name="variablesaddeventmd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / addEvent
 
@@ -1603,12 +1562,11 @@ Defined in: [utilities/child.ts:47](https://github.com/GrangbelrLurain/forest-js
 
 Defined in: [utilities/event.ts:5](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/utilities/event.ts#L5)
 
-
 <a name="variablesaddstylemd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / addStyle
 
@@ -1618,12 +1576,11 @@ Defined in: [utilities/event.ts:5](https://github.com/GrangbelrLurain/forest-js/
 
 Defined in: [utilities/style.ts:4](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/utilities/style.ts#L4)
 
-
 <a name="variablesaddtriggermd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / addTrigger
 
@@ -1633,12 +1590,11 @@ Defined in: [utilities/style.ts:4](https://github.com/GrangbelrLurain/forest-js/
 
 Defined in: [utilities/trigger.ts:5](https://github.com/GrangbelrLurain/forest-js/blob/bdde5e53b4a2b124cb391dbc48a1becdc370cd3d/packages/core/src/utilities/trigger.ts#L5)
 
-
 <a name="variablescreateutilitymd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / createUtility
 
@@ -1662,12 +1618,11 @@ Function to be executed
 
 Utility function
 
-
 <a name="variablesdecoratemd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / decorate
 
@@ -1691,12 +1646,11 @@ Array of utility functions to apply
 
 Decorated element
 
-
 <a name="variablesusemd"></a>
 
-[**Forest.js Core Documentation v1.1.3**](#readmemd)
+[**Forest.js Core Documentation v1.2.0**](#readmemd)
 
-***
+---
 
 [Forest.js Core Documentation](#readmemd) / use
 
