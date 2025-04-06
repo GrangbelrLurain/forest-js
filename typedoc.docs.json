@@ -1,5 +1,5 @@
 {
-  "out": "./packages/docs",
+  "out": "./docs",
   "entryPoints": ["packages/core/src/index.ts"],
   "entryPointStrategy": "resolve",
   "excludePrivate": true,
