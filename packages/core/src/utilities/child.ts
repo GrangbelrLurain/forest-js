@@ -18,7 +18,6 @@ const toNode = (node: TreeNode): Node => {
 };
 
 const flatten = (nodes: TreeNode | TreeNode[]): Node[] => {
-  console.log(nodes);
   if (Array.isArray(nodes)) {
     return Array.from(nodes).flatMap((node) => {
       if (Array.isArray(node)) return flatten(node);
@@ -42,6 +41,112 @@ const processPromiseResult = <R extends Child>(result: R | { default: R }) => {
     return result.default;
   }
   return result as R;
+};
+
+// head 요소 핸들링을 위한 함수 수정
+const handleHeadElement = (child: Node): boolean => {
+  if (!(child instanceof Element)) return false;
+
+  // 개별 head 내부 요소 처리 (기존 로직과 동일)
+  if (child.tagName === "TITLE") {
+    const existing = document.head.querySelector("title");
+    if (existing) {
+      document.head.replaceChild(child, existing);
+    } else {
+      document.head.appendChild(child);
+    }
+    return true;
+  } else if (child.tagName === "META") {
+    const name = child.getAttribute("name");
+    const property = child.getAttribute("property");
+    const httpEquiv = child.getAttribute("http-equiv");
+
+    let selector = "";
+    if (name) selector = `meta[name="${name}"]`;
+    else if (property) selector = `meta[property="${property}"]`;
+    else if (httpEquiv) selector = `meta[http-equiv="${httpEquiv}"]`;
+
+    if (selector) {
+      const existing = document.head.querySelector(selector);
+      if (existing) {
+        document.head.replaceChild(child, existing);
+        return true;
+      }
+    }
+    // 일치하는 메타 태그가 없으면 추가
+    document.head.appendChild(child);
+    return true;
+  } else if (child.tagName === "LINK") {
+    const rel = child.getAttribute("rel");
+    const href = child.getAttribute("href");
+
+    if (rel && href) {
+      const selector = `link[rel="${rel}"][href="${href}"]`;
+      const existing = document.head.querySelector(selector);
+      if (existing) {
+        document.head.replaceChild(child, existing);
+        return true;
+      }
+    }
+    // 일치하는 링크 태그가 없으면 추가
+    document.head.appendChild(child);
+    return true;
+  } else if (child.tagName === "STYLE" || child.tagName === "SCRIPT") {
+    const id = child.getAttribute("id");
+    if (id) {
+      const selector = `${child.tagName.toLowerCase()}#${id}`;
+      const existing = document.head.querySelector(selector);
+      if (existing) {
+        document.head.replaceChild(child, existing);
+        return true;
+      }
+    } else if (child.tagName === "SCRIPT") {
+      const src = child.getAttribute("src");
+      if (src) {
+        const selector = `script[src="${src}"]`;
+        const existing = document.head.querySelector(selector);
+        if (existing) {
+          document.head.replaceChild(child, existing);
+          return true;
+        }
+      }
+    }
+    // 일치하는 태그가 없으면 추가
+    document.head.appendChild(child);
+    return true;
+  }
+
+  // 다른 모든 head 요소는 그냥 추가
+  document.head.appendChild(child);
+  return true;
+};
+
+// 노드 처리 로직 개선
+const appendNodes = (el: HTMLElement, nodes: Node[], placeholder?: Node) => {
+  // head 요소 특별 처리
+  if (el.tagName === "HEAD" || el === document.head) {
+    nodes.forEach((child) => handleHeadElement(child));
+    if (placeholder && placeholder.parentNode === el) {
+      el.removeChild(placeholder);
+    }
+  } else {
+    if (placeholder && placeholder.parentNode === el) {
+      // placeholder 대체 로직 유지
+      el.insertBefore(nodes[0], placeholder);
+      el.removeChild(placeholder);
+      nodes.slice(1).forEach((node) => el.appendChild(node));
+    } else {
+      // 일반 요소 처리 로직 개선
+      const oldChildren = Array.from(el.childNodes);
+      if (oldChildren.length > 0 && !isSameNode(oldChildren, nodes)) {
+        el.replaceChildren(...nodes);
+      } else if (oldChildren.length === 0) {
+        nodes
+          .filter((node) => !(node instanceof HTMLHeadElement))
+          .forEach((node) => el.appendChild(node));
+      }
+    }
+  }
 };
 
 export const addChild: ChildUtility = <
@@ -70,19 +175,7 @@ export const addChild: ChildUtility = <
               : (result as Child);
 
           const children = flatten(processedResult);
-
-          if (placeholder.parentNode === el) {
-            // placeholder 대체
-            el.insertBefore(children[0], placeholder);
-            el.removeChild(placeholder);
-            children.slice(1).forEach((child) => el.appendChild(child));
-          } else {
-            // 이미 요소가 존재하면 업데이트
-            const oldChildren = Array.from(el.childNodes);
-            if (!isSameNode(oldChildren, children)) {
-              el.replaceChildren(...children);
-            }
-          }
+          appendNodes(el, children, placeholder);
         } catch (error) {
           console.error("Error loading dynamic component:", error);
         }
@@ -109,19 +202,15 @@ export const addChild: ChildUtility = <
           .then(async (result) => {
             const processedResult = processPromiseResult(result);
             const nodes = flatten(processedResult);
-
-            if (placeholder.parentNode === el) {
-              el.insertBefore(nodes[0], placeholder);
-              el.removeChild(placeholder);
-              nodes.slice(1).forEach((node) => el.appendChild(node));
-            }
+            appendNodes(el, nodes, placeholder);
           })
           .catch((error) => {
             console.error("Error loading dynamic children:", error);
           });
       } else {
-        // 일반 동기 처리 (기존 코드)
-        flatten(children).forEach((child) => el.appendChild(child));
+        // 일반 동기 처리
+        const nodes = flatten(children);
+        appendNodes(el, nodes);
       }
     }
 

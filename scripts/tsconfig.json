@@ -2,9 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../dist/scripts",
-    "rootDir": ".",
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "rootDir": "..",
     "noEmit": true,
     "allowImportingTsExtensions": true
   },
@@ -12,6 +10,6 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "include": ["./**/*.ts"],
+  "include": ["./**/*.ts", "../packages/core/src/**/*.ts"],
   "exclude": ["../node_modules"]
 }

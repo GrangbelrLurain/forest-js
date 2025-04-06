@@ -32,7 +32,7 @@ export const createRouter = (options: CreateRouterOptions = {}) => {
 
   return {
     router: {
-      push: (path: string, state: any) => {
+      push: (path: string, state?: any) => {
         window.history.pushState(state, "", path);
         routerStore.set({ path, state, status: "loading" });
       },

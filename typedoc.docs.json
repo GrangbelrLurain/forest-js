@@ -10,6 +10,6 @@
   "theme": "default",
   "categorizeByGroup": true,
   "sort": ["source-order"],
-  "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-merge-modules"],
+  "plugin": ["typedoc-plugin-merge-modules"],
   "mergeModulesMergeMode": "module"
 }

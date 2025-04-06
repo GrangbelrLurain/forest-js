@@ -70,3 +70,30 @@ export type ElementMeta = {
   /** Set of store binding cleanup functions */
   storeBindings?: Set<() => void>;
 };
+
+/**
+ * Callback function for the Forest.js app.
+ *
+ * @param {T} props - The DOM element to be decorated.
+ * @returns {T} The decorated DOM element.
+ * @example
+ * ```ts
+ * const app = createForest("#app", (el) => el); // <- "#app" is starting point of the app
+ * ```
+ */
+export type AppCallback<T extends HTMLElement> = (props: T) => T;
+
+/**
+ * The props for the Forest.js app.
+ *
+ * @param {T} props - The DOM element to be decorated.
+ * @returns {T} The decorated DOM element.
+ * @example
+ * ```ts
+ * const app = createForest("#app", (el) => el); // <- "#app" is starting point of the app
+ * const app = createForest((el) => el); // <- if you don't pass the starting point, the app will be mounted to the body
+ * ```
+ */
+export type ForestAppProps<T extends HTMLElement> =
+  | [HTMLElement | string, AppCallback<T>]
+  | [AppCallback<HTMLBodyElement>];

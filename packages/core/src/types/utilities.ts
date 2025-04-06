@@ -27,7 +27,10 @@ export type Utility<E extends Element> = (el: E) => E;
  * const reactiveProps: StoreProps<string, MyStoreMap> = [{ myStore }, ({ myStore }) => myStore.values];
  * ```
  */
-export type StoreProps<R, S extends StoreMap = StoreMap> = [S, (values: StoreValues<S>) => R];
+export type StoreProps<R, S extends StoreMap = StoreMap> = [
+  S,
+  (values: StoreValues<S>) => R
+];
 
 /**
  * Type for direct (non-reactive) props.
@@ -54,7 +57,9 @@ export type DirectProps<R> = [R] | [Promise<R>];
  * const utilityProps: UtilityProps<string> = ["Hello"];
  * ```
  */
-export type UtilityProps<R, S extends StoreMap = StoreMap> = DirectProps<R> | [S, (values: StoreValues<S>) => R];
+export type UtilityProps<R, S extends StoreMap = StoreMap> =
+  | DirectProps<R>
+  | [S, (values: StoreValues<S>) => R];
 
 /**
  * Creates a utility function that enqueues a function to be executed on the next tick.
@@ -71,7 +76,9 @@ export type UtilityProps<R, S extends StoreMap = StoreMap> = DirectProps<R> | [S
  * });
  * ```
  */
-export type CreateUtility = <E extends Element>(fn: (el: E) => void) => Utility<E>;
+export type CreateUtility = <E extends Element>(
+  fn: (el: E) => void
+) => Utility<E>;
 
 /**
  * Combines multiple utility functions into a single utility.
@@ -87,7 +94,9 @@ export type CreateUtility = <E extends Element>(fn: (el: E) => void) => Utility<
  * combinedUtility(MyElement);
  * ```
  */
-export type UseUtility = <E extends Element>(...utils: Utility<E>[]) => Utility<E>;
+export type UseUtility = <E extends Element>(
+  ...utils: Utility<E>[]
+) => Utility<E>;
 
 /**
  * Directly applies multiple utility functions to an element.
@@ -99,7 +108,10 @@ export type UseUtility = <E extends Element>(...utils: Utility<E>[]) => Utility<
  * decorate(MyElement, addAttribute({ "data-active": true }));
  * ```
  */
-export type DecorateUtility = <E extends Element>(el: E, ...utils: Utility<E>[]) => E;
+export type DecorateUtility = <E extends Element>(
+  el: E,
+  ...utils: Utility<E>[]
+) => E;
 
 /**
  * Clears store bindings when a specific condition is met.
@@ -113,7 +125,12 @@ export type DecorateUtility = <E extends Element>(el: E, ...utils: Utility<E>[])
  * const clearStore = addClear(myStore, (values) => values.name === "John")(MyElement);
  * ```
  */
-export type ClearUtility = <S extends StoreMap>(store: S, shouldClear: (values: Record<keyof S, ReturnType<S[keyof S]["get"]>>) => boolean) => Utility<HTMLElement>;
+export type ClearUtility = <S extends StoreMap>(
+  store: S,
+  shouldClear: (
+    values: Record<keyof S, ReturnType<S[keyof S]["get"]>>
+  ) => boolean
+) => Utility<HTMLElement>;
 
 /**
  * @kind Experimental Utility
@@ -130,7 +147,13 @@ export type ClearUtility = <S extends StoreMap>(store: S, shouldClear: (values: 
  * )(MyElement);
  * ```
  */
-export type AttributeUtility = <E extends Element, R extends Partial<E>, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => Utility<E>;
+export type AttributeUtility = <
+  E extends Element,
+  R extends Partial<E>,
+  S extends StoreMap = StoreMap
+>(
+  ...args: UtilityProps<R, S>
+) => Utility<E>;
 
 /**
  * Attaches event listeners to an element.
@@ -143,7 +166,10 @@ export type AttributeUtility = <E extends Element, R extends Partial<E>, S exten
  * const onClick = addEvent("click", (e) => console.log(e.currentTarget))(MyElement);
  * ```
  */
-export type EventUtility = <E extends Element, K extends keyof HTMLElementEventMap>(
+export type EventUtility = <
+  E extends Element,
+  K extends keyof HTMLElementEventMap
+>(
   type: K,
   handler: (e: HTMLElementEventMap[K] & { currentTarget: E }) => void,
   options?: AddEventListenerOptions
@@ -163,7 +189,13 @@ export type EventUtility = <E extends Element, K extends keyof HTMLElementEventM
  * )(MyElement);
  * ```
  */
-export type StyleUtility = <R extends Partial<CSSStyleDeclaration>, S extends StoreMap = StoreMap, E extends HTMLElement = HTMLElement>(...args: UtilityProps<R, S>) => Utility<E>;
+export type StyleUtility = <
+  R extends Partial<CSSStyleDeclaration>,
+  S extends StoreMap = StoreMap,
+  E extends HTMLElement = HTMLElement
+>(
+  ...args: UtilityProps<R, S>
+) => Utility<E>;
 
 /**
  * Object containing named trigger functions
@@ -190,7 +222,13 @@ export type Triggers = {
  * triggers.customTrigger();
  * ```
  */
-export type TriggerUtility = <R extends Triggers, S extends StoreMap = StoreMap, E extends HTMLElement = HTMLElement>(...args: UtilityProps<R, S>) => Utility<E>;
+export type TriggerUtility = <
+  R extends Triggers,
+  S extends StoreMap = StoreMap,
+  E extends HTMLElement = HTMLElement
+>(
+  ...args: UtilityProps<R, S>
+) => Utility<E>;
 
 /**
  * Utility for getting triggers from an element for use outside of component
@@ -202,7 +240,9 @@ export type TriggerUtility = <R extends Triggers, S extends StoreMap = StoreMap,
  * triggers.customTrigger();
  * ```
  */
-export type GetTrigger = <T extends Triggers, E extends HTMLElement>(el: E) => Readonly<T>;
+export type GetTrigger = <T extends Triggers, E extends HTMLElement>(
+  el: E
+) => Readonly<T>;
 
 /**
  * Type representing a child or children that can be added to an element
@@ -214,5 +254,17 @@ export type Child = TreeNode | TreeNode[];
  * @template E Element type
  * @template R Child content to add (can be promise or dynamic import)
  * @template S StoreMap type when used reactively
+ * @example
+ * ```ts
+ * addChild("Hello")(MyElement);
+ * // if you want to add head in your app, you can do this:
+ * addChild([...someHead's children])(tree("head"));
+ * ```
  */
-export type ChildUtility = <E extends HTMLElement, R extends Child | Promise<Child> | Promise<{ default: Child }>, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => (el: E) => E;
+export type ChildUtility = <
+  E extends HTMLElement,
+  R extends Child | Promise<Child> | Promise<{ default: Child }>,
+  S extends StoreMap = StoreMap
+>(
+  ...args: UtilityProps<R, S>
+) => (el: E) => E;
