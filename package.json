@@ -13,8 +13,7 @@
     "publish:create": "pnpm --filter create-forest npm-publish",
     "dev:pure": "pnpm --filter forest-pure-demo dev",
     "dev:tailwind": "pnpm --filter forest-tailwind-demo dev",
-    "generate:doc": "pnpm exec ts-node --project scripts/tsconfig.json scripts/generate-document.script.ts",
-    "generate:readme": "pnpm exec ts-node --project scripts/tsconfig.json scripts/generate-readme.script.ts"
+    "generate:doc": "pnpm exec typedoc --options typedoc.docs.json --tsconfig scripts/tsconfig.json"
   },
   "keywords": [
     "DOM"
