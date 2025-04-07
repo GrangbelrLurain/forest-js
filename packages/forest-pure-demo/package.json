@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@forest-js/core": "workspace:*"
+    "@forest-js/core": "^1.2.2"
   },
   "devDependencies": {
     "typescript": "~5.7.2",

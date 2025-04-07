@@ -1,6 +1,6 @@
 {
   "name": "@forest-js/core",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "A tiny, functional DOM engine with explicit update and real DOM.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc && tsc-alias",
+    "clean": "rmdir /s /q dist && del /f /q tsconfig.tsbuildinfo",
+    "build": "npm run clean && tsc && tsc-alias",
     "npm-publish": "npm publish"
   },
   "repository": {
