@@ -1,12 +1,4 @@
-import {
-  createForest,
-  decorate,
-  addChild,
-  tree,
-  addStyle,
-  createStore,
-  addEvent,
-} from "@forest-js/core";
+import { createForest, decorate, addChild, tree, addStyle, createStore, addEvent } from "@forest-js/core/dist/core";
 import { routerStore } from "./shared/lib/router";
 import "./app/global.css";
 import Header from "./entities/layout/ui/Header.ts/index.ts";

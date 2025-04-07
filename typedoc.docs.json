@@ -1,15 +1,16 @@
 {
   "out": "./docs",
-  "entryPoints": ["packages/core/src/index.ts"],
+  "entryPoints": ["packages/core/src/core.ts", "packages/core/src/router/index.ts", "packages/core/src/store/index.ts", "packages/core/src/utilities/index.ts", "packages/core/src/types/index.ts"],
   "entryPointStrategy": "resolve",
   "excludePrivate": true,
   "excludeExternals": true,
   "includeVersion": true,
   "readme": "none",
   "name": "Forest.js Core Documentation",
-  "theme": "default",
   "categorizeByGroup": true,
   "sort": ["source-order"],
-  "plugin": ["typedoc-plugin-merge-modules"],
-  "mergeModulesMergeMode": "module"
+  "theme": "typedoc-github-theme",
+  "plugin": ["typedoc-plugin-merge-modules", "typedoc-github-theme"],
+  "mergeModulesMergeMode": "module",
+  "categoryOrder": ["core", "router", "store", "utilities", "types"]
 }

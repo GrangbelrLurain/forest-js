@@ -5,9 +5,25 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+    "./core": {
+      "import": "./dist/core.js",
+      "types": "./dist/core.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "types": "./dist/types.d.ts"
+    },
+    "./router": {
+      "import": "./dist/router/index.js",
+      "types": "./dist/router/index.d.ts"
+    },
+    "./store": {
+      "import": "./dist/store/index.js",
+      "types": "./dist/store/index.d.ts"
+    },
+    "./utilities": {
+      "import": "./dist/utilities/index.js",
+      "types": "./dist/utilities/index.d.ts"
     }
   },
   "type": "module",

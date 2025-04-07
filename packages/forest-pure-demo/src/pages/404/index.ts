@@ -1,4 +1,4 @@
-import { addChild, decorate, addStyle, tree } from "@forest-js/core";
+import { addChild, decorate, addStyle, tree } from "@forest-js/core/dist/core";
 
 const Text = ({ text, fontSize }: { text: string; fontSize: string }) => {
   return decorate(
@@ -22,10 +22,7 @@ const NotFound = decorate(
     alignItems: "center",
     flexDirection: "column",
   }),
-  addChild([
-    Text({ text: "404", fontSize: "80px" }),
-    Text({ text: "Not Found Page🙄", fontSize: "20px" }),
-  ])
+  addChild([Text({ text: "404", fontSize: "80px" }), Text({ text: "Not Found Page🙄", fontSize: "20px" })])
 );
 
 export default NotFound;

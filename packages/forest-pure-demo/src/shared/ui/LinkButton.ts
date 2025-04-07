@@ -1,23 +1,11 @@
-import {
-  addChild,
-  addEvent,
-  addStyle,
-  createStore,
-  TreeNode,
-} from "@forest-js/core";
+import { addChild, addEvent, addStyle, createStore, TreeNode } from "@forest-js/core/dist/core";
 
-import { decorate } from "@forest-js/core";
+import { decorate } from "@forest-js/core/dist/core";
 
-import { tree } from "@forest-js/core";
+import { tree } from "@forest-js/core/dist/core";
 import { router } from "../lib/router";
 
-const LinkButton = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: TreeNode;
-}) => {
+const LinkButton = ({ href, children }: { href: string; children: TreeNode }) => {
   const isHover = createStore(false);
   return decorate(
     tree("a"),

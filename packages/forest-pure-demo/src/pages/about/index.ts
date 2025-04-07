@@ -1,10 +1,4 @@
-import {
-  tree,
-  decorate,
-  addChild,
-  addStyle,
-  addAttribute,
-} from "@forest-js/core";
+import { tree, decorate, addChild, addStyle, addAttribute } from "@forest-js/core/dist/core";
 import OuterLink from "../../shared/ui/OuterLink";
 
 const About = decorate(
@@ -17,17 +11,7 @@ const About = decorate(
     gap: "20px",
   }),
   addChild([
-    decorate(
-      tree("div"),
-      addChild([
-        decorate(tree("img"), addAttribute({ src: "logo.svg" })),
-        decorate(
-          tree("p"),
-          addChild("Forest.js"),
-          addStyle({ fontSize: "20px", margin: "0px" })
-        ),
-      ])
-    ),
+    decorate(tree("div"), addChild([decorate(tree("img"), addAttribute({ src: "logo.svg" })), decorate(tree("p"), addChild("Forest.js"), addStyle({ fontSize: "20px", margin: "0px" }))])),
     decorate(
       tree("div"),
       addStyle({

@@ -1,4 +1,4 @@
-import { addEvent, createStore, decorate, addChild } from "@forest-js/core";
+import { addEvent, createStore, decorate, addChild } from "@forest-js/core/dist/core";
 import Button from "../../../../shared/ui/Button";
 
 const CountButton = () => {

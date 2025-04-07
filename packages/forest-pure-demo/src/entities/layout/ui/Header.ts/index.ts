@@ -1,10 +1,4 @@
-import {
-  addAttribute,
-  addChild,
-  addStyle,
-  decorate,
-  tree,
-} from "@forest-js/core";
+import { addAttribute, addChild, addStyle, decorate, tree } from "@forest-js/core/dist/core";
 import LinkButton from "../../../../shared/ui/LinkButton";
 const Header = () => {
   console.log("Header is not Rerender only once");
@@ -63,10 +57,7 @@ const Header = () => {
           alignItems: "center",
           gap: "20px",
         }),
-        addChild([
-          LinkButton({ href: "/", children: "Home" }),
-          LinkButton({ href: "/about", children: "About" }),
-        ])
+        addChild([LinkButton({ href: "/", children: "Home" }), LinkButton({ href: "/about", children: "About" })])
       ),
     ])
   );

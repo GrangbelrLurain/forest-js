@@ -4,7 +4,14 @@
     "outDir": "../dist/scripts",
     "rootDir": "..",
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true
   },
   "ts-node": {
     "esm": true,
