@@ -1,4 +1,4 @@
-import { Store } from "@core/types";
+import { Store } from "@core/types/store";
 
 /**
  * @function createStore

@@ -8,3 +8,4 @@ dist
 .env.test
 
 tsconfig.tsbuildinfo
+tsconfig.*.tsbuildinfo

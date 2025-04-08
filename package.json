@@ -4,7 +4,9 @@
   "description": "Document Object Model Create System",
   "main": "main.js",
   "scripts": {
-    "test": "test",
+    "test:core:types": "pnpm --filter core test:types",
+    "test:core:runtime": "pnpm --filter core test:runtime",
+    "test:core": "pnpm --filter core test",
     "build:core": "pnpm --filter core build",
     "build:cli": "pnpm --filter cli build",
     "build:create": "pnpm --filter create-forest build",

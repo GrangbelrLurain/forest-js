@@ -1,9 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@core/*": ["./packages/core/src/*"]
-    },
     "composite": true,
     "declaration": true,
     "declarationMap": true,
