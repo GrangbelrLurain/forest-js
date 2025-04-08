@@ -1,10 +1,4 @@
-import {
-  Child,
-  ChildUtility,
-  StoreMap,
-  TreeNode,
-  UtilityProps,
-} from "@core/types";
+import { Child, StoreMap, TreeNode, UtilityProps } from "@core/types";
 import { enqueue, ensureMeta } from "@core/dom";
 
 const toNode = (node: TreeNode): Node => {
@@ -141,22 +135,29 @@ const appendNodes = (el: HTMLElement, nodes: Node[], placeholder?: Node) => {
       if (oldChildren.length > 0 && !isSameNode(oldChildren, nodes)) {
         el.replaceChildren(...nodes);
       } else if (oldChildren.length === 0) {
-        nodes
-          .filter((node) => !(node instanceof HTMLHeadElement))
-          .forEach((node) => el.appendChild(node));
+        nodes.filter((node) => !(node instanceof HTMLHeadElement)).forEach((node) => el.appendChild(node));
       }
     }
   }
 };
 
-export const addChild: ChildUtility = <
-  E extends HTMLElement,
-  R extends Child | Promise<Child> | Promise<{ default: Child }>,
-  S extends StoreMap = StoreMap
->(
-  ...args: UtilityProps<R, S>
-) => {
-  return (el: E) => {
+/**
+ * @function addChild
+ * @description Utility for adding children to an element
+ * @template E Element type
+ * @template R Child content to add (can be promise or dynamic import)
+ * @template S StoreMap type when used reactively
+ * @param args - Child content or store and mapper function
+ * @returns Utility function for adding children
+ * @example
+ * ```ts
+ * addChild("Hello")(MyElement);
+ * // if you want to add head in your app, you can do this:
+ * addChild([...someHead's children])(tree("head"));
+ * ```
+ */
+export const addChild = <E extends HTMLElement, R extends Child | Promise<Child> | Promise<{ default: Child }>, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
+  return (el: E): E => {
     if (args.length === 2 && typeof args[1] === "function") {
       const [stores, mapper] = args as [S, (values: S) => R | Promise<R>];
       const placeholder = document.createTextNode(""); // 로딩 중 placeholder
@@ -169,10 +170,7 @@ export const addChild: ChildUtility = <
         try {
           const result = mapper(values as S);
 
-          const processedResult =
-            result instanceof Promise
-              ? processPromiseResult(await result)
-              : (result as Child);
+          const processedResult = result instanceof Promise ? processPromiseResult(await result) : (result as Child);
 
           const children = flatten(processedResult);
           appendNodes(el, children, placeholder);
@@ -184,9 +182,7 @@ export const addChild: ChildUtility = <
       apply();
 
       // 스토어 구독
-      const unsubs = Object.values(stores).map((store) =>
-        store.subscribe(() => enqueue(apply))
-      );
+      const unsubs = Object.values(stores).map((store) => store.subscribe(() => enqueue(apply)));
 
       const meta = ensureMeta(el);
       meta.storeBindings ??= new Set();

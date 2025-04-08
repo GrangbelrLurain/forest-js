@@ -1,8 +1,23 @@
 import { ensureMeta, enqueue } from "@core/dom";
-import { StoreMap, TriggerUtility, Triggers, UtilityProps } from "@core/types";
+import { StoreMap, Triggers, Utility, UtilityProps } from "@core/types";
 import { createUtility } from "./core";
 
-export const addTrigger: TriggerUtility = <E extends HTMLElement, R extends Triggers, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
+/**
+ * @function addTrigger
+ * @description Utility for adding triggers to an element
+ * @template R Trigger object to add
+ * @template S StoreMap type when used reactively
+ * @template E Element type (defaults to HTMLElement)
+ * @param args - Trigger object or store and mapper function
+ * @returns Utility function for adding triggers
+ * @example
+ * ```ts
+ * addTrigger({ customTrigger: () => console.log("Custom trigger") })(MyElement);
+ * const triggers = getTriggers(MyElement);
+ * triggers.customTrigger();
+ * ```
+ */
+export const addTrigger = <R extends Triggers, S extends StoreMap = StoreMap, E extends HTMLElement = HTMLElement>(...args: UtilityProps<R, S>): Utility<E> => {
   return createUtility((el: E) => {
     const meta = ensureMeta(el);
     const triggers = (meta.triggers ??= {});
@@ -29,6 +44,19 @@ export const addTrigger: TriggerUtility = <E extends HTMLElement, R extends Trig
   });
 };
 
+/**
+ * @function getTrigger
+ * @description Utility for getting triggers from an element for use outside of component
+ * @template T Trigger object type
+ * @template E Element type (defaults to HTMLElement)
+ * @param el - Element to get triggers from
+ * @returns Trigger object
+ * @example
+ * ```ts
+ * const triggers = getTriggers(MyElement);
+ * triggers.customTrigger();
+ * ```
+ */
 export const getTrigger = <T extends Triggers, E extends HTMLElement>(el: E): Readonly<T> => {
   const meta = ensureMeta(el);
   return meta.triggers as T;

@@ -1,17 +1,17 @@
 {
   "name": "@forest-js/core",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A tiny, functional DOM engine with explicit update and real DOM.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    "./core": {
-      "import": "./dist/core.js",
-      "types": "./dist/core.d.ts"
+    "./forest": {
+      "import": "./dist/forest.js",
+      "types": "./dist/forest.d.ts"
     },
     "./types": {
-      "import": "./dist/types.js",
-      "types": "./dist/types.d.ts"
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./router": {
       "import": "./dist/router/index.js",
@@ -35,11 +35,19 @@
   "scripts": {
     "clean": "rmdir /s /q dist && del /f /q tsconfig.tsbuildinfo",
     "build": "npm run clean && tsc && tsc-alias",
+    "test:runtime": "jest",
+    "test:types": "tsc -p tsconfig.test.json --noEmit",
+    "test": "npm run test:runtime && npm run test:types",
     "npm-publish": "npm publish"
   },
+  "homepage": "https://github.com/GrangbelrLurain/forest-js#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/GrangbelrLurain/forest-js"
+  },
+  "documentation": "https://grangbelrlurain.github.io/forest-js/",
+  "bugs": {
+    "url": "https://github.com/GrangbelrLurain/forest-js/issues"
   },
   "keywords": [
     "dom",
@@ -54,6 +62,9 @@
   "license": "MIT",
   "devDependencies": {
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "@types/jest": "^29.5.5"
   }
 }

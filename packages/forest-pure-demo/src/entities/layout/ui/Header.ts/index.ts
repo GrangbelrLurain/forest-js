@@ -1,4 +1,5 @@
-import { addAttribute, addChild, addStyle, decorate, tree } from "@forest-js/core/dist/core";
+import { addAttribute, addChild, addStyle, decorate } from "@forest-js/core/utilities";
+import { tree } from "@forest-js/core/forest";
 import LinkButton from "../../../../shared/ui/LinkButton";
 const Header = () => {
   console.log("Header is not Rerender only once");

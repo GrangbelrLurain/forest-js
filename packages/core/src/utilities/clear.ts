@@ -1,7 +1,20 @@
 import { ensureMeta, enqueue } from "@core/dom";
-import { ClearUtility, StoreMap, Utility } from "@core/types";
+import { StoreMap, Utility } from "@core/types";
 
-export const addClear: ClearUtility =
+/**
+ * @function addClear
+ * @description Clears store bindings when a specific condition is met.
+ *
+ * @template S - StoreMap type.
+ * @param store - The store to clear.
+ * @param shouldClear - Condition to trigger clearing.
+ * @returns A utility for handling store cleanup.
+ * @example
+ * ```ts
+ * const clearStore = addClear(myStore, (values) => values.name === "John")(MyElement);
+ * ```
+ */
+export const addClear =
   <S extends StoreMap>(store: S, shouldClear: (values: Record<keyof S, ReturnType<S[keyof S]["get"]>>) => boolean): Utility<HTMLElement> =>
   (el) => {
     const meta = ensureMeta(el);

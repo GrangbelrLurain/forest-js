@@ -1,4 +1,5 @@
-import { addStyle, tree, use } from "@forest-js/core/dist/core";
+import { tree } from "@forest-js/core/forest";
+import { addStyle, use } from "@forest-js/core/utilities";
 
 const Button = () => {
   const ButtonDef = use<HTMLButtonElement>(

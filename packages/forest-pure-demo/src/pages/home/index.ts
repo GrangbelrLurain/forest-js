@@ -1,4 +1,5 @@
-import { addChild, decorate, addStyle, tree, addAttribute } from "@forest-js/core/dist/core";
+import { addChild, decorate, addStyle, addAttribute } from "@forest-js/core/utilities";
+import { tree } from "@forest-js/core/forest";
 import CodeCard from "../../entities/exampeCode/ui/CodeCard";
 
 const Home = decorate(

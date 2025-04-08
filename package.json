@@ -28,7 +28,7 @@
   "devDependencies": {
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.13",
-    "typedoc": "^0.28.1",
+    "typedoc": "^0.28.2",
     "typedoc-github-theme": "^0.3.0",
     "typedoc-plugin-markdown": "^4.6.1",
     "typedoc-plugin-merge-modules": "^7.0.0",

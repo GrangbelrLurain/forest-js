@@ -8,6 +8,16 @@ export function ensureMeta(el: Element): ElementMeta {
   return elementMeta.get(el)!;
 }
 
+/**
+ * @function tree
+ * @description Create a tree element
+ * @param tag - Tag name
+ * @returns Tree element
+ * @example
+ * ```ts
+ * const el = tree("div");
+ * ```
+ */
 export function tree<T extends ElementName>(tag: T): DomElement<T> {
   const el = document.createElement(tag) as DomElement<T>;
 

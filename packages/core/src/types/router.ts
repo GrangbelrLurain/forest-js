@@ -1,31 +1,4 @@
 /**
- * Options for creating a router.
- * This type defines the configuration options used when creating a router instance.
- *
- * @property {boolean} [isMultiInstance=false] - Specifies whether multiple router instances can be created.
- *    If true, allows multiple independent routers to coexist.
- *    If false, a single global router is used.
- * @example
- * ```ts
- * const { router, routerStore } = createRouter({ isMultiInstance: true }); // <- "{ isMultiInstance: true }" is a CreateRouterOptions
- * ```
- */
-export type CreateRouterOptions = {
-  /**
-   * When true, allows creating multiple router instances.
-   * Defaults to false.
-   *
-   * @type {boolean}
-   * @default false
-   * @example
-   * ```ts
-   * const options: CreateRouterOptions = { isMultiInstance: true };
-   * ```
-   */
-  isMultiInstance?: boolean;
-};
-
-/**
  * Represents the possible states of a route.
  * Used to indicate the current status of the router or route.
  *

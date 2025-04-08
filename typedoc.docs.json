@@ -1,6 +1,6 @@
 {
   "out": "./docs",
-  "entryPoints": ["packages/core/src/core.ts", "packages/core/src/router/index.ts", "packages/core/src/store/index.ts", "packages/core/src/utilities/index.ts", "packages/core/src/types/index.ts"],
+  "entryPoints": ["packages/core/src/forest.ts", "packages/core/src/router/index.ts", "packages/core/src/store/index.ts", "packages/core/src/utilities/index.ts", "packages/core/src/types/index.ts"],
   "entryPointStrategy": "resolve",
   "excludePrivate": true,
   "excludeExternals": true,
@@ -12,5 +12,10 @@
   "theme": "typedoc-github-theme",
   "plugin": ["typedoc-plugin-merge-modules", "typedoc-github-theme"],
   "mergeModulesMergeMode": "module",
-  "categoryOrder": ["core", "router", "store", "utilities", "types"]
+  "categoryOrder": ["forest", "router", "store", "utilities", "types"],
+  "validation": {
+    "invalidLink": true,
+    "notDocumented": true
+  },
+  "blockTags": ["@param", "@returns", "@example", "@template", "@property", "@type", "@default", "@description"]
 }

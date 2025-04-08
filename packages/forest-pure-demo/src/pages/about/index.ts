@@ -1,5 +1,6 @@
-import { tree, decorate, addChild, addStyle, addAttribute } from "@forest-js/core/dist/core";
+import { tree } from "@forest-js/core/forest";
 import OuterLink from "../../shared/ui/OuterLink";
+import { decorate, addChild, addStyle, addAttribute } from "@forest-js/core/utilities";
 
 const About = decorate(
   tree("main"),

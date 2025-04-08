@@ -1,8 +1,6 @@
-import { addEvent } from "@forest-js/core/dist/core";
+import { addChild, decorate, addEvent, addStyle } from "@forest-js/core/utilities";
+import { tree } from "@forest-js/core/forest";
 
-import { addStyle } from "@forest-js/core/dist/core";
-
-import { addChild, decorate, tree } from "@forest-js/core/dist/core";
 import CONSTANTS from "../../../../shared/constant";
 import Card from "../../../../shared/ui/Card";
 import CountButton from "../CountButton";

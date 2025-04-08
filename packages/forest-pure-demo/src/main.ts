@@ -1,8 +1,10 @@
-import { createForest, decorate, addChild, tree, addStyle, createStore, addEvent } from "@forest-js/core/dist/core";
+import { createForest, tree } from "@forest-js/core/forest";
+import { decorate, addChild, addStyle, addEvent } from "@forest-js/core/utilities";
 import { routerStore } from "./shared/lib/router";
 import "./app/global.css";
 import Header from "./entities/layout/ui/Header.ts/index.ts";
 import BackgroundImage from "./entities/layout/ui/BackgroundImage/index.ts";
+import { createStore } from "@forest-js/core/store";
 
 const main = decorate(
   tree("main"),

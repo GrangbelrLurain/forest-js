@@ -1,4 +1,5 @@
-import { tree, decorate, addStyle } from "@forest-js/core/dist/core";
+import { tree } from "@forest-js/core/forest";
+import { decorate, addStyle } from "@forest-js/core/utilities";
 
 const Card = () => {
   const CardDef = tree("div");

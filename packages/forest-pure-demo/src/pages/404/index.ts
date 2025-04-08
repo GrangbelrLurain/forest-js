@@ -1,4 +1,5 @@
-import { addChild, decorate, addStyle, tree } from "@forest-js/core/dist/core";
+import { addChild, decorate, addStyle } from "@forest-js/core/utilities";
+import { tree } from "@forest-js/core/forest";
 
 const Text = ({ text, fontSize }: { text: string; fontSize: string }) => {
   return decorate(

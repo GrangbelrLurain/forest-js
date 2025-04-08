@@ -1,7 +1,25 @@
 import { ensureMeta } from "@core/dom";
-import { StoreMap, StyleUtility, UtilityProps } from "@core/types";
+import { StoreMap, Utility, UtilityProps } from "@core/types";
 
-export const addStyle: StyleUtility = <E extends HTMLElement, R extends Partial<CSSStyleDeclaration>, S extends StoreMap = StoreMap>(...args: UtilityProps<R, S>) => {
+/**
+ * @function addStyle
+ * @description Applies CSS styles to an element.
+ * Supports reactive styles when using stores.
+ *
+ * @template R - Style properties to apply.
+ * @template S - StoreMap type when used reactively.
+ * @template E - Element type (defaults to HTMLElement).
+ * @param args - Style properties or store and mapper function
+ * @returns Utility function for adding styles
+ * @example
+ * ```ts
+ * const setColor = addStyle<HTMLDivElement, { color: string }>(
+ *   { color: "red" }
+ * )(MyElement);
+ * ```
+ */
+
+export const addStyle = <R extends Partial<CSSStyleDeclaration>, S extends StoreMap = StoreMap, E extends HTMLElement = HTMLElement>(...args: UtilityProps<R, S>): Utility<E> => {
   return (el: E) => {
     if (args.length === 2 && typeof args[1] === "function") {
       // Reactive mode

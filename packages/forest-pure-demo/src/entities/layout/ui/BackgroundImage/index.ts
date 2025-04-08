@@ -1,4 +1,6 @@
-import { addStyle, decorate, Store, tree } from "@forest-js/core/dist/core";
+import { addStyle, decorate } from "@forest-js/core/utilities";
+import { tree } from "@forest-js/core/forest";
+import { Store } from "@forest-js/core/types";
 
 const BackgroundImage = ({ sectionRotate }: { sectionRotate: Store<{ x: number; y: number }> }) =>
   decorate(
